@@ -36,14 +36,15 @@ function ProfileCard() {
         bio
       }
     `,
-    userRef
+    userRef,
   );
-  
+
   return <div>{/* render with data */}</div>;
 }
 ```
 
 Benefits:
+
 - Components declare exactly what data they need
 - No over-fetching or under-fetching
 - Automatic request deduplication
@@ -57,8 +58,7 @@ For annotation platform with 10K+ items:
 const { loadNext, hasNext } = usePaginationFragment(
   graphql`
     fragment List_data on Query {
-      items(first: $count, after: $cursor) 
-        @connection(key: "List_items") {
+      items(first: $count, after: $cursor) @connection(key: "List_items") {
         edges {
           node {
             id
@@ -68,11 +68,12 @@ const { loadNext, hasNext } = usePaginationFragment(
       }
     }
   `,
-  data
+  data,
 );
 ```
 
 This pattern:
+
 - Loads data incrementally as user scrolls
 - Maintains connection state automatically
 - Works seamlessly with server pagination
@@ -102,11 +103,13 @@ The UI updates instantly, then reconciles with server response.
 ### 4. Monorepo Benefits
 
 Meta uses a massive monorepo with:
+
 - **Buck2**: Fast, scalable build system
 - **Sapling**: Version control optimized for monorepos
 - **Shared Components**: Reuse across teams
 
 Advantages:
+
 - Atomic changes across services
 - Easy dependency management
 - Consistent tooling and practices
@@ -128,6 +131,7 @@ Key metrics we tracked:
 - **Bundle Size**: < 200KB initial JS (code-split!)
 
 Techniques:
+
 - Route-based code splitting
 - Image optimization (WebP, lazy loading)
 - Relay store normalization (no duplicate data)
@@ -141,20 +145,21 @@ const environment = createMockEnvironment();
 
 test('renders user profile', () => {
   render(<Profile />, { relayEnvironment: environment });
-  
+
   expect(screen.getByText('Loading...')).toBeInTheDocument();
-  
+
   act(() => {
     environment.mock.resolveMostRecentOperation({
       data: { user: { name: 'Alice', avatar: '...' } },
     });
   });
-  
+
   expect(screen.getByText('Alice')).toBeInTheDocument();
 });
 ```
 
 Layers:
+
 - **Unit**: Component behavior
 - **Integration**: Relay + GraphQL queries
 - **E2E**: Full user flows with Playwright

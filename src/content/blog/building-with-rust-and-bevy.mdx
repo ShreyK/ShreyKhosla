@@ -45,6 +45,7 @@ fn movement_system(
 ```
 
 This architecture makes it easy to:
+
 - Add new behaviors without modifying existing code
 - Parallelize systems automatically
 - Serialize/deserialize game state
@@ -63,6 +64,7 @@ One of Endeavor's core features is infinite procedural generation:
 ### 1. Ship Combat Complexity
 
 Initial combat was too complex. Solution:
+
 - Simplified to energy management system
 - Clear visual feedback for weapon status
 - Predictable enemy behavior patterns
@@ -70,6 +72,7 @@ Initial combat was too complex. Solution:
 ### 2. Cross-Platform Rendering
 
 Different hardware capabilities required:
+
 - Dynamic quality settings
 - Shader variants for different platforms
 - Graceful degradation on low-end systems
@@ -77,6 +80,7 @@ Different hardware capabilities required:
 ### 3. Physics Simulation
 
 N-body physics for realistic orbital mechanics:
+
 - Barnes-Hut algorithm for O(n log n) complexity
 - Fixed timestep for deterministic simulation
 - Interpolation for smooth rendering
@@ -84,6 +88,7 @@ N-body physics for realistic orbital mechanics:
 ## What's Next?
 
 Current focus areas:
+
 - Steam release preparation
 - Multiplayer foundation (using [Lightyear](https://github.com/cBournhonesque/lightyear))
 - More variety in procedural content
@@ -92,6 +97,7 @@ Current focus areas:
 ## Try It Out
 
 Endeavor is available now:
+
 - **Steam**: [Coming Soon](https://store.steampowered.com)
 - **Itch.io**: [shrey.games](https://shrey.games)
 
