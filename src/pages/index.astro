@@ -1,31 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StarfieldHero from '../components/StarfieldHero.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout>
   <main>
-    <section id="hero" class="hero min-h-screen flex items-center justify-center pt-16">
-      <div class="text-center px-4">
-        <h1 class="text-6xl font-bold mb-4 glow-text">
-          Shrey Khosla
-        </h1>
-        <p class="text-2xl text-text-secondary mb-8">
-          Senior Software Engineer
-        </p>
-        <p class="text-lg text-text-muted max-w-2xl mx-auto mb-12">
-          7+ years building products from 0→1 to N→N+1 across startups and enterprise
-        </p>
-        <div class="flex gap-4 justify-center">
-          <a href="#experience" class="px-6 py-3 glassmorphism glow-border rounded-lg hover:scale-105 transition-transform">
-            View Work
-          </a>
-          <a href="#contact" class="px-6 py-3 bg-accent-blue text-space-black rounded-lg hover:bg-accent-cyan transition-colors">
-            Get in Touch
-          </a>
-        </div>
-      </div>
-    </section>
+    <StarfieldHero />
 
     <section id="experience" class="min-h-screen py-20 px-4">
       <div class="max-w-6xl mx-auto">
@@ -63,9 +44,3 @@ import Footer from '../components/Footer.astro';
   
   <Footer />
 </BaseLayout>
-
-<style>
-  .hero {
-    background: radial-gradient(ellipse at center, oklch(0.20 0.05 240) 0%, oklch(0.10 0.01 240) 100%);
-  }
-</style>
