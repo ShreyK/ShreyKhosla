@@ -32,6 +32,10 @@ Professional portfolio showcasing 7+ years of software engineering experience ac
 
 ```
 shrey.khosla/
+├── docs/                        # Documentation
+│   ├── IMPLEMENTATION.md        # Detailed implementation tracking
+│   ├── NEXT_STEPS.md           # Session planning and objectives
+│   └── BUGFIXES.md             # Bug tracking and resolutions
 ├── public/
 │   ├── CNAME                    # Custom domain configuration
 │   ├── favicon.svg
@@ -42,8 +46,12 @@ shrey.khosla/
 │   │   ├── StarfieldHero.astro  # Three.js hero section
 │   │   ├── Navbar.astro
 │   │   ├── ExperienceCard.astro
-│   │   ├── ProjectCard.astro
-│   │   └── ...
+│   │   ├── ExperienceTimeline.astro
+│   │   ├── ProductCard.astro
+│   │   ├── ProductsGrid.astro
+│   │   ├── GameShowcase.astro
+│   │   ├── TechPill.astro
+│   │   └── Footer.astro
 │   ├── content.config.ts        # Content collections schema
 │   ├── data/
 │   │   └── blog/                # MDX blog posts
@@ -151,4 +159,7 @@ Optimizations:
 
 ---
 
-**Implementation Docs:** See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for detailed development tracking.
+**Implementation Docs:** See [docs/](./docs/) folder for detailed development tracking:
+- [IMPLEMENTATION.md](./docs/IMPLEMENTATION.md) - Full implementation checklist and architecture
+- [NEXT_STEPS.md](./docs/NEXT_STEPS.md) - Session planning and objectives  
+- [BUGFIXES.md](./docs/BUGFIXES.md) - Bug tracking and resolutions

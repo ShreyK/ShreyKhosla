@@ -1,0 +1,81 @@
+---
+import TechPill from './TechPill.astro';
+
+export interface ProductData {
+  name: string;
+  description: string;
+  metrics?: string;
+  techStack: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  image?: string;
+}
+
+interface Props extends ProductData {}
+
+const { name, description, metrics, techStack, liveUrl, githubUrl, image } = Astro.props;
+---
+
+<div class="product-card glassmorphism rounded-lg overflow-hidden border border-accent-blue/20 hover:border-accent-blue/50 transition-all duration-300 group opacity-0">
+  <!-- Image/Visual -->
+  <div class="product-image relative bg-gradient-to-br from-space-navy to-space-dark aspect-video overflow-hidden">
+    {image ? (
+      <img src={image} alt={name} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center">
+        <div class="text-6xl font-bold text-accent-blue/20 group-hover:text-accent-blue/40 transition-colors">
+          {name.charAt(0)}
+        </div>
+      </div>
+    )}
+    <div class="absolute inset-0 bg-gradient-to-t from-space-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6">
+    <h3 class="text-2xl font-bold text-text-primary mb-2 group-hover:text-accent-cyan transition-colors">{name}</h3>
+    
+    {metrics && (
+      <p class="text-accent-blue font-semibold mb-3">{metrics}</p>
+    )}
+    
+    <p class="text-text-secondary mb-4 leading-relaxed">{description}</p>
+
+    <!-- Tech Stack -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      {techStack.map((tech) => (
+        <TechPill label={tech} variant="secondary" />
+      ))}
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex gap-3">
+      {liveUrl && (
+        <a
+          href={liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 px-4 py-2 bg-accent-blue text-space-black rounded-lg hover:bg-accent-cyan transition-colors font-semibold text-center"
+        >
+          View Live →
+        </a>
+      )}
+      {githubUrl && (
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 px-4 py-2 glassmorphism glow-border rounded-lg hover:scale-105 transition-transform font-semibold text-center text-text-primary"
+        >
+          View Code →
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-card {
+    transform: translateY(20px);
+  }
+</style>

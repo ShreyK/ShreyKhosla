@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StarfieldHero from '../components/StarfieldHero.astro';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
+import ProductsGrid from '../components/ProductsGrid.astro';
+import GameShowcase from '../components/GameShowcase.astro';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -8,28 +11,13 @@ import Footer from '../components/Footer.astro';
   <main>
     <StarfieldHero />
 
-    <section id="experience" class="min-h-screen py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">Experience</h2>
-        <p class="text-center text-text-secondary">Coming soon...</p>
-      </div>
-    </section>
+    <ExperienceTimeline />
 
-    <section id="products" class="min-h-screen py-20 px-4 bg-space-navy">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">Products</h2>
-        <p class="text-center text-text-secondary">Coming soon...</p>
-      </div>
-    </section>
+    <ProductsGrid />
 
-    <section id="games" class="min-h-screen py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">Games</h2>
-        <p class="text-center text-text-secondary">Coming soon...</p>
-      </div>
-    </section>
+    <GameShowcase />
 
-    <section id="contact" class="min-h-screen py-20 px-4 bg-space-navy">
+    <section id="contact" class="min-h-screen py-20 px-4 bg-gradient-to-b from-space-black to-space-navy">
       <div class="max-w-6xl mx-auto text-center">
         <h2 class="text-4xl font-bold mb-12">Get in Touch</h2>
         <p class="text-xl text-text-secondary mb-8">

@@ -1,0 +1,95 @@
+---
+import TechPill from './TechPill.astro';
+
+export interface ExperienceData {
+  company: string;
+  role: string;
+  startDate: string;
+  endDate: string;
+  phase: '0→1' | '1→N' | 'N→N+1';
+  description: string;
+  achievements: string[];
+  techStack: string[];
+  logo?: string;
+}
+
+interface Props extends ExperienceData {
+  side: 'left' | 'right';
+}
+
+const { company, role, startDate, endDate, phase, description, achievements, techStack, side } = Astro.props;
+
+const phaseColors = {
+  '0→1': 'bg-green-500/20 text-green-400 border-green-500/30',
+  '1→N': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+  'N→N+1': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+};
+---
+
+<div class={`experience-card flex gap-8 mb-16 ${side === 'right' ? 'flex-row-reverse' : ''}`}>
+  <!-- Timeline Connector -->
+  <div class="timeline-dot-container flex-shrink-0 flex flex-col items-center">
+    <div class="timeline-dot w-4 h-4 rounded-full bg-accent-blue glow-dot transition-all duration-300"></div>
+  </div>
+
+  <!-- Card Content -->
+  <div class="experience-card-content flex-1 glassmorphism p-6 rounded-lg border border-accent-blue/20 hover:border-accent-blue/40 transition-all duration-300 opacity-0">
+    <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
+      <div class="flex-1">
+        <h3 class="text-2xl font-bold text-text-primary mb-1">{company}</h3>
+        <p class="text-lg text-accent-blue font-semibold">{role}</p>
+        <p class="text-sm text-text-muted">{startDate} - {endDate}</p>
+      </div>
+      <span class={`inline-block px-3 py-1 rounded-full text-sm font-semibold border ${phaseColors[phase]}`}>
+        {phase}
+      </span>
+    </div>
+
+    <p class="text-text-secondary mb-4 leading-relaxed">
+      {description}
+    </p>
+
+    {achievements && achievements.length > 0 && (
+      <ul class="space-y-2 mb-4">
+        {achievements.map((achievement) => (
+          <li class="text-text-secondary text-sm flex items-start">
+            <span class="text-accent-cyan mr-2 flex-shrink-0">▸</span>
+            <span>{achievement}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class="flex flex-wrap gap-2 mt-4">
+      {techStack.map((tech) => (
+        <TechPill label={tech} />
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .glow-dot {
+    box-shadow: 0 0 10px var(--color-accent-blue),
+                0 0 20px var(--color-accent-blue);
+  }
+
+  .experience-card:hover .glow-dot {
+    box-shadow: 0 0 15px var(--color-accent-blue),
+                0 0 30px var(--color-accent-blue),
+                0 0 45px var(--color-accent-blue);
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 768px) {
+    .experience-card {
+      flex-direction: column !important;
+      gap: 1rem;
+    }
+
+    .timeline-dot-container {
+      flex-direction: row;
+      padding: 0;
+    }
+  }
+</style>

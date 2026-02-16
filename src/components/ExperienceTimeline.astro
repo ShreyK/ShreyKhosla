@@ -1,0 +1,275 @@
+---
+import ExperienceCard, { type ExperienceData } from './ExperienceCard.astro';
+
+const experiences: ExperienceData[] = [
+  {
+    company: 'Juniper Creates',
+    role: 'Senior Software Engineer',
+    startDate: 'May 2025',
+    endDate: 'Jul 2025',
+    phase: '1→N',
+    description: 'Merchandise Platform-as-a-Service (PaaS). Reporting directly under the CTO, defining strategic roadmap with key stakeholders.',
+    achievements: [
+      'Implemented new storefront creation designs (React + TypeScript)',
+      'Hardened backend endpoints (TypeScript + NodeJS) for PostgreSQL + DynamoDB',
+      'Improved testing infrastructure (Jest) across the stack',
+      'Defined roadmap for tech-debt and engineering excellence tasks',
+    ],
+    techStack: ['C#', 'C++', 'Java', 'Rust', 'React', 'TypeScript', 'Node.js', 'PostgreSQL', 'DynamoDB'],
+  },
+  {
+    company: 'Meta | Reality Labs Research',
+    role: 'Contingent Worker',
+    startDate: 'Aug 2023',
+    endDate: 'May 2025',
+    phase: '0→1',
+    description: 'Research Platform development. Architected full-stack applications across Web, Android, and backend microservices deployed to Meta infrastructure.',
+    achievements: [
+      'Launched full-stack Memory application from concept to production on facebook.com',
+      'Enhanced annotations platform for ML model training (React, Relay, GraphQL, PHP, Python)',
+      'Integrated Meta research hardware (Ray-Bans, Aria) via proprietary Android SDKs',
+      'Weekly sprint demos to VPs; key member of Tiger Team for annual CTO innovation demos',
+      'Provided technical mentorship to North American engineers and managed offshore vendor in India',
+    ],
+    techStack: ['React', 'Relay', 'GraphQL', 'PHP', 'Python', 'Rust', 'Thrift', 'Java', 'Kotlin', 'JNI', 'C++', 'Android'],
+  },
+  {
+    company: 'd1g1t Inc.',
+    role: 'Senior Software Engineer',
+    startDate: 'Oct 2022',
+    endDate: 'Aug 2023',
+    phase: '1→N',
+    description: 'Multi-tenant enterprise financial tech product. Wealth management platform serving advisors and investors with React mono-repo architecture.',
+    achievements: [
+      'Led major refactoring of table pagination algorithm (React) for 10,000+ records, improving performance by 10%',
+      'Optimized Webpack configuration resolving caching issues, enhancing deployment speed',
+      'Implemented Document Management system with approval workflow',
+      'Integrated FutureVault API for secure document access',
+      'Implemented Docusign integration ensuring compliance with policy agreements',
+    ],
+    techStack: ['React', 'Python', 'Django', 'Webpack', 'FutureVault API', 'Docusign'],
+  },
+  {
+    company: 'RBC',
+    role: 'Senior Software Engineer',
+    startDate: 'Jun 2021',
+    endDate: 'Oct 2022',
+    phase: '0→1',
+    description: 'Enterprise product serving 2 LOB\'s in RBC: Wealth Management and Personal & Consumer Banking.',
+    achievements: [
+      'Developed Angular mono-repo deployed via Jenkins to Pivotal Cloud Foundry',
+      'Integrated Verified.Me (Interac Direct) for secure client data retrieval',
+      'Enhanced security with RSA encrypted JWTs to sign URL parameters',
+      'Designed NGINX proxy pods to validate JWT parameters and retrieve auth tokens',
+      'Optimized Jenkins build pipelines, reducing Angular build times by 25%',
+      'Co-hosted bi-weekly Technology Knowledge Shares (TKS) for 10+ developers',
+    ],
+    techStack: ['Angular', 'Jenkins', 'Pivotal Cloud Foundry', 'Apigee', 'NGINX', 'Verified.Me', 'JWT', 'RSA'],
+  },
+  {
+    company: 'Microsoft',
+    role: 'Software Engineer',
+    startDate: 'Jun 2018',
+    endDate: 'May 2021',
+    phase: 'N→N+1',
+    description: 'Multiple product teams across Microsoft 365 ecosystem including OneDrive Photos,PowerPoint Online, OneDrive Android, and Windows Photos UWP.',
+    achievements: [
+      'Implemented ItemScope (Redux-based) state management upgrade in OneDrive Photos (KnockoutJS → React migration)',
+      'Developed reusable functional web components (JS/TS) deployed across Microsoft 365 services',
+      'Designed Tags Feedback Modal feature from 0→1 improving user engagement',
+      'Led Zero Query Search feature in OneDrive Android App Photos tab',
+      'Resolved critical deadlock bug in Windows Photos UWP affecting 7,000+ devices (16M+ crashes biweekly)',
+      'Upgraded internal OneDrive SDK and integrated web components into PowerPoint Online',
+    ],
+    techStack: ['React', 'JavaScript', 'TypeScript', 'KnockoutJS', 'Redux', 'C#', 'C++', 'Java', 'Kotlin', 'UWP'],
+  },
+];
+
+const internships = [
+  {
+    company: 'Microsoft',
+    role: 'Software Engineering Intern',
+    startDate: 'Sept 2017',
+    endDate: 'Dec 2017',
+    phase: 'N→N+1' as const,
+    description: '3D Viewer (UWP): Creative design process research for 3DFE ecosystem. Reduced release package size from 100MB to 27MB. Built prototype A/B experimentation infrastructure.',
+    achievements: [
+      'Reduced app package size from 100MB to 27MB',
+      'Built prototype A/B experimentation infrastructure',
+      'Performed data analysis on 10,000+ 3D models using PowerShell + C++ tools',
+      'Built 3D Asset Importer DLL for HoloLens project',
+    ],
+    techStack: ['C#', 'C++', 'UWP', 'HoloLens', 'PowerShell'],
+  },
+  {
+    company: 'theScore Inc.',
+    role: 'Android Engineering Intern',
+    startDate: 'May 2016',
+    endDate: 'Aug 2016',
+    phase: '1→N' as const,
+    description: 'Refactored major parts of the app for lightweight, efficient, and user-friendly experience.',
+    achievements: [
+      'Added Spoiler Mode feature',
+      'Implemented Dynamic Coachmarks',
+      'Built Localization support into CI/CD pipeline',
+    ],
+    techStack: ['Android', 'Java', 'CI/CD'],
+  },
+  {
+    company: 'KnowRoaming',
+    role: 'Android Engineering Intern',
+    startDate: 'Sept 2015',
+    endDate: 'Dec 2015',
+    phase: '0→1' as const,
+    description: 'Redesigned and rebuilt entire Android App for Android 5.0 Material Design update.',
+    achievements: [
+      'Redesigned and rebuilt entire Android App for Material Design',
+      'Solo developer on e-Sim sample app presented to Telna',
+      'Added backend support for SMS verification and account management',
+    ],
+    techStack: ['Android', 'Java', 'Material Design'],
+  },
+  {
+    company: 'Uken Games',
+    role: 'QA Analyst',
+    startDate: 'Jan 2015',
+    endDate: 'May 2015',
+    phase: '1→N' as const,
+    description: 'Game design and development. Pair programming to develop prototype.',
+    achievements: [
+      'Game design from brainstorming to prototype development',
+      'Pair programming using JavaScript ES6 (Frontend) and Ruby on Rails (Backend)',
+      'Testing 7 HTML5 games across multiple platforms (Android, iOS, Blackberry, Amazon, Windows)',
+      'Automated smoke testing using Selenium',
+    ],
+    techStack: ['JavaScript ES6', 'Ruby on Rails', 'Selenium', 'QA'],
+  },
+  {
+    company: 'University of Waterloo - HCI Research',
+    role: 'Research Development Intern',
+    startDate: 'May 2014',
+    endDate: 'Aug 2014',
+    phase: '0→1' as const,
+    description: 'Human Computer Interaction research. Built 3D Aware Application for PhD thesis on "Large Scale displays in Public Areas".',
+    achievements: [
+      'Built 3D Aware Application using Kinect device, smart projector, and laptop',
+      'Developed with Processing (OpenGL interops) and Kinect SDK',
+      'Setup and ran experiments for multi-device military simulation software',
+      'Taught Programming 101 to 70+ individuals at Games Institute Jam',
+    ],
+    techStack: ['Processing', 'OpenGL', 'Kinect SDK', 'Java', 'HCI Research'],
+  },
+];
+---
+
+<section id="experience" class="py-20 px-4 relative overflow-hidden">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-space-black via-space-navy/30 to-space-black pointer-events-none"></div>
+  
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Experience</h2>
+      <p class="text-xl text-text-secondary">7+ years building products across startups and enterprise</p>
+    </div>
+
+    <!-- Timeline Line (Desktop) -->
+    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-accent-blue/50 to-transparent h-full top-0"></div>
+
+    <!-- Experience Cards -->
+    <div class="space-y-8">
+      {experiences.map((exp, index) => (
+        <ExperienceCard {...exp} side={index % 2 === 0 ? 'left' : 'right'} />
+      ))}
+    </div>
+
+    <!-- Internships Section (Expandable) -->
+    <div class="mt-16 glassmorphism p-6 rounded-lg border border-accent-purple/20">
+      <details class="internships-details">
+        <summary class="text-2xl font-bold text-text-primary cursor-pointer hover:text-accent-cyan transition-colors flex items-center justify-between">
+          <span>Internships & Co-op Experiences</span>
+          <svg class="w-6 h-6 transition-transform duration-300 details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="mt-8 space-y-8">
+          {internships.map((intern, index) => (
+            <ExperienceCard {...intern} side={index % 2 === 0 ? 'left' : 'right'} />
+          ))}
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+  // GSAP ScrollTrigger animations for experience cards
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    // Animate experience cards on scroll
+    const cards = document.querySelectorAll('.experience-card-content');
+    
+    cards.forEach((card, index) => {
+      const side = index % 2 === 0 ? -100 : 100;
+      
+      gsap.fromTo(card,
+        {
+          opacity: 0,
+          x: side,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            end: 'top 50%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
+  } else {
+    // Instant appearance for reduced motion
+    gsap.set('.experience-card-content', { opacity: 1 });
+  }
+
+  // Details arrow rotation
+  const detailsElements = document.querySelectorAll('.internships-details');
+  detailsElements.forEach((details) => {
+    details.addEventListener('toggle', (e) => {
+      const arrow = (e.target as HTMLDetailsElement).querySelector('.details-arrow') as HTMLElement;
+      if (arrow) {
+        if ((e.target as HTMLDetailsElement).open) {
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  details[open] summary {
+    color: var(--color-accent-cyan);
+  }
+  
+  summary::marker {
+    content: '';
+  }
+  
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
