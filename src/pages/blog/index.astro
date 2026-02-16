@@ -1,0 +1,107 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+// Get all blog posts, sorted by date (newest first)
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<BaseLayout 
+  title="Blog | Shrey Khosla" 
+  description="Technical insights, dev logs, and thoughts on software engineering"
+>
+  <div class="min-h-screen py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="mb-16 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 glow-text">Blog</h1>
+        <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+          Technical insights, dev logs, and thoughts on software engineering
+        </p>
+      </div>
+
+      <!-- Blog Posts Grid -->
+      <div class="space-y-8">
+        {sortedPosts.map((post: CollectionEntry<'blog'>) => (
+          <article class="glassmorphism glow-border rounded-lg p-6 hover:scale-[1.02] transition-transform duration-300">
+            <a href={`/blog/${post.id.replace('.mdx', '')}`} class="block">
+              <!-- Date and Tags -->
+              <div class="flex flex-wrap items-center gap-3 mb-3 text-sm">
+                <time datetime={post.data.pubDate.toISOString()} class="text-text-muted">
+                  {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {post.data.tags && (
+                  <div class="flex gap-2">
+                    {post.data.tags.slice(0, 3).map((tag: string) => (
+                      <span class="px-2 py-1 bg-accent-blue/10 text-accent-cyan text-xs rounded border border-accent-blue/30">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <!-- Title and Description -->
+              <h2 class="text-2xl md:text-3xl font-bold mb-3 text-text-primary hover:text-accent-cyan transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-text-secondary leading-relaxed mb-4">
+                {post.data.description}
+              </p>
+
+              <!-- Read More -->
+              <span class="text-accent-blue hover:text-accent-cyan transition-colors font-semibold inline-flex items-center gap-2">
+                Read More
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <!-- Back to Home -->
+      <div class="mt-12 text-center">
+        <a 
+          href="/#experience" 
+          class="inline-flex items-center gap-2 text-text-secondary hover:text-accent-cyan transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  article {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

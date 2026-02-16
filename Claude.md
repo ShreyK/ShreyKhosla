@@ -87,7 +87,6 @@ Building a professional portfolio website for Shrey Khosla (shreykhosla.com) —
 - Performance optimizations and accessibility audit
 
 #### Session 2: Content Sections & Bug Fixes (Completed)
-**Completed:**
 - ✅ Fixed Footer social icons (proper SVG markup with set:html)
 - ✅ Reorganized documentation into docs/ folder
 - ✅ Created docs/BUGFIXES.md for tracking UI issues
@@ -135,3 +134,95 @@ Building a professional portfolio website for Shrey Khosla (shreykhosla.com) —
 - Deploy to GitHub Pages
 - Test custom domain configuration
 
+#### Session 3: Blog Setup & About Section (Completed)
+**Completed:**
+- ✅ Fixed UX bugs from screenshots:
+  - Changed button text from dark to white on blue buttons (text-white instead of text-space-black)
+  - Added shadow effects to buttons for better visibility (shadow-lg shadow-accent-blue/50)
+  - Improved contrast across all CTA buttons (StarfieldHero, ProductCard, GameShowcase)
+- ✅ Set up Blog with Content Collections:
+  - Updated content.config.ts to use src/content/blog directory
+  - Added author field to blog post schema
+  - Created 3 sample MDX blog posts:
+    1. welcome-to-my-portfolio.mdx - Introduction post
+    2. building-with-rust-and-bevy.mdx - Game dev technical post
+    3. scaling-react-apps-at-meta.mdx - Frontend architecture post
+  - Created blog listing page (src/pages/blog/index.astro)
+  - Created blog post template (src/pages/blog/[...slug].astro)
+  - Used Astro's new glob loader API with render() function
+  - Glassmorphism card styling with hover effects
+  - Blog post metadata (date, author, tags display)
+  - Responsive prose styling with Tailwind Typography
+- ✅ Built comprehensive About Section:
+  - Personal background and bio (3 paragraphs)
+  - Education: University of Waterloo (Computer Engineering, Minor in Business, Graduated 2018)
+  - Awards & Recognition:
+    - President's Entrance Scholarship ($2,000)
+    - Engineering International Experience Award
+    - Outstanding Co-Op Student Award
+  - Skills grid organized by 8 categories:
+    - Full-Stack: React, TypeScript, Node.js, Next.js, Astro, GraphQL, Relay, Redux
+    - Backend: Python, Django, FastAPI, PostgreSQL, MongoDB, Redis, REST, gRPC
+    - DevOps: Docker, Kubernetes, AWS, GCP, CI/CD, GitHub Actions, Terraform
+    - Game Dev: Rust, Bevy Engine, C++, Unity, Three.js, WebGL, Shaders
+    - Mobile: React Native, Android, Kotlin, Java, JNI, iOS, Swift
+    - Databases: PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Elasticsearch
+    - AR/VR: Meta SDKs, ARCore, Unity XR, 3D Math, Computer Vision
+    - Tools: Git, Webpack, Vite, Jest, Playwright, Figma, Linear
+  - 2-column layout with glassmorphism cards
+  - GSAP ScrollTrigger entrance animations
+  - Background gradient blobs for visual interest
+- ✅ Updated Navigation:
+  - Added "About" link to navbar menu
+  - Maintains scroll-to-section functionality
+- ✅ Fixed TypeScript errors:
+  - TechPill component prop (tech → label)
+  - Blog pages type annotations for CollectionEntry<'blog'>
+  - Astro content loader render() API usage
+- ✅ Successfully built site (5 pages generated):
+  - Homepage with all sections
+  - Blog listing page
+  - 3 blog post pages
+  - Sitemap generated
+- ✅ Build metrics:
+  - 0 errors, 0 warnings
+  - 13 Vite modules transformed
+  - Total bundle: ~610 KB (gzipped: ~162 KB)
+  - Three.js: 464 KB (gzipped: 116 KB)
+  - GSAP + ScrollTrigger: 44 KB (gzipped: 18 KB)
+  - Main JS: 70 KB (gzipped: 28 KB)
+
+**Components Created:**
+- AboutSection.astro - Full about/education/skills section
+- src/pages/blog/index.astro - Blog listing page
+- src/pages/blog/[...slug].astro - Dynamic blog post template
+
+**Blog Posts Created:**
+- welcome-to-my-portfolio.mdx (Feb 1, 2026)
+- building-with-rust-and-bevy.mdx (Jan 15, 2026)
+- scaling-react-apps-at-meta.mdx (Dec 20, 2025)
+
+**Design Improvements:**
+- Button contrast: All blue buttons now use white text for better readability
+- Button shadows: Added shadow-lg with accent color glow
+- Consistent CTA styling across all sections
+
+**Next Steps:**
+- Add product screenshots and company logos (public/images/)
+- Add profile photo and OG image for social sharing
+- Performance optimization:
+  - Image optimization (WebP, lazy loading)
+  - Code splitting verification
+  - Lighthouse audit (target 95+ all metrics)
+- Accessibility audit:
+  - Keyboard navigation testing
+  - Screen reader compatibility
+  - WCAG 2.1 AA compliance
+- SEO enhancements:
+  - Add structured data (JSON-LD)
+  - Optimize meta descriptions
+  - Add canonical URLs
+- Deploy to GitHub Pages:
+  - Push to main branch to trigger GitHub Actions
+  - Configure custom domain DNS
+  - Enable HTTPS enforcement

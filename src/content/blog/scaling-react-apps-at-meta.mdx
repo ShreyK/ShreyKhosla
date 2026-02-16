@@ -1,0 +1,176 @@
+---
+title: "Scaling React Applications at Meta: Lessons from Reality Labs"
+description: "What I learned building full-stack applications at Meta, from Relay/GraphQL to Android integration"
+pubDate: 2025-12-20
+author: "Shrey Khosla"
+tags: ["react", "meta", "graphql", "relay", "scale"]
+---
+
+# Scaling React Applications at Meta: Lessons from Reality Labs
+
+During my time at **Meta's Reality Labs Research**, I worked on architecting full-stack applications that needed to scale to millions of users. Here are the key lessons I learned.
+
+## The Meta Stack
+
+Meta's web applications use a unique but powerful stack:
+
+- **React**: Component-based UI
+- **Relay**: GraphQL client with automatic data fetching
+- **Hack/PHP**: Backend services (yes, really!)
+- **Python**: ML pipelines and data processing
+- **Rust/Thrift**: High-performance microservices
+
+## Key Learnings
+
+### 1. Colocate Data Requirements
+
+One of Relay's superpowers is **colocating data requirements** with components:
+
+```jsx
+function ProfileCard() {
+  const data = useFragment(
+    graphql`
+      fragment ProfileCard_user on User {
+        name
+        avatar
+        bio
+      }
+    `,
+    userRef
+  );
+  
+  return <div>{/* render with data */}</div>;
+}
+```
+
+Benefits:
+- Components declare exactly what data they need
+- No over-fetching or under-fetching
+- Automatic request deduplication
+- Easy refactoring (delete component = remove unused queries)
+
+### 2. Incremental Loading for Large Datasets
+
+For annotation platform with 10K+ items:
+
+```jsx
+const { loadNext, hasNext } = usePaginationFragment(
+  graphql`
+    fragment List_data on Query {
+      items(first: $count, after: $cursor) 
+        @connection(key: "List_items") {
+        edges {
+          node {
+            id
+            ...ItemCard_item
+          }
+        }
+      }
+    }
+  `,
+  data
+);
+```
+
+This pattern:
+- Loads data incrementally as user scrolls
+- Maintains connection state automatically
+- Works seamlessly with server pagination
+
+### 3. Optimistic Updates for Better UX
+
+When users interact with the app, show changes immediately:
+
+```jsx
+function likePost(postId) {
+  commitMutation(environment, {
+    mutation: graphql`mutation LikePost($id: ID!) { ... }`,
+    variables: { id: postId },
+    optimisticResponse: {
+      likePost: {
+        id: postId,
+        isLiked: true,
+        likeCount: post.likeCount + 1,
+      },
+    },
+  });
+}
+```
+
+The UI updates instantly, then reconciles with server response.
+
+### 4. Monorepo Benefits
+
+Meta uses a massive monorepo with:
+- **Buck2**: Fast, scalable build system
+- **Sapling**: Version control optimized for monorepos
+- **Shared Components**: Reuse across teams
+
+Advantages:
+- Atomic changes across services
+- Easy dependency management
+- Consistent tooling and practices
+
+### 5. Mobile Integration
+
+Integrated React web apps with native Android:
+
+- **React Native Web**: Shared components between web and mobile
+- **JNI Bridges**: Call into C++ from Kotlin
+- **Proto/Thrift**: Consistent data models
+
+## Performance at Scale
+
+Key metrics we tracked:
+
+- **Time to Interactive (TTI)**: < 2s on 3G
+- **First Contentful Paint (FCP)**: < 1s
+- **Bundle Size**: < 200KB initial JS (code-split!)
+
+Techniques:
+- Route-based code splitting
+- Image optimization (WebP, lazy loading)
+- Relay store normalization (no duplicate data)
+- Service workers for offline support
+
+## Testing Strategy
+
+```typescript
+// Component tests with Relay Mock Environment
+const environment = createMockEnvironment();
+
+test('renders user profile', () => {
+  render(<Profile />, { relayEnvironment: environment });
+  
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
+  
+  act(() => {
+    environment.mock.resolveMostRecentOperation({
+      data: { user: { name: 'Alice', avatar: '...' } },
+    });
+  });
+  
+  expect(screen.getByText('Alice')).toBeInTheDocument();
+});
+```
+
+Layers:
+- **Unit**: Component behavior
+- **Integration**: Relay + GraphQL queries
+- **E2E**: Full user flows with Playwright
+
+## Takeaways
+
+Building at Meta taught me:
+
+1. **Data-driven UI**: Colocate data requirements
+2. **Performance Matters**: Every millisecond counts at scale
+3. **Incremental Loading**: Essential for large datasets
+4. **Optimistic UI**: Make interactions feel instant
+5. **Monorepos Work**: When tooling is built for it
+
+These patterns aren't Meta-specific—you can apply them to any React application that needs to scale.
+
+---
+
+Have questions about scaling React or working with Relay? Let's chat!

@@ -2,7 +2,8 @@
 
 **Project:** Shrey Khosla Portfolio — shreykhosla.com  
 **Started:** February 15, 2026  
-**Status:** 🚧 In Progress
+**Current Session:** Session 3 - February 15, 2026  
+**Status:** 🚧 In Progress → Blog & About sections complete
 
 ## Overview
 
@@ -10,94 +11,88 @@ Building a dark, futuristic portfolio website showcasing professional experience
 
 ## Tech Stack
 
-- **Framework:** Astro 5 (static site generation)
-- **Styling:** Tailwind CSS v4 + custom CSS with oklch() colors
-- **3D Graphics:** Three.js (vanilla, no React)
-- **Animations:** GSAP + ScrollTrigger (now fully free)
-- **Content:** Astro Content Collections + MDX
+- **Framework:** Astro 5.1.0 (static site generation)
+- **Styling:** Tailwind CSS v4.0.0 + custom CSS with oklch() colors
+- **3D Graphics:** Three.js 0.171.0 (vanilla, no React)
+- **Animations:** GSAP 3.12.7 + ScrollTrigger (now fully free)
+- **Content:** Astro Content Collections + MDX (@astrojs/mdx 4.1.0)
 - **Deployment:** GitHub Pages via GitHub Actions
 - **Domain:** shreykhosla.com
 
-## Architecture Decisions
-
-### Why Astro?
-- Zero JS by default → optimal performance
-- Perfect for content-heavy portfolios
-- Ships only what's needed (Three.js/GSAP load selectively)
-- Built-in content collections for blog
-- GitHub Pages static deployment
-
-### Why Vanilla Three.js?
-- Hero starfield is a simple particle system
-- No need for React's component model
-- Avoids 50KB+ React runtime overhead
-- Direct WebGL control for performance
-
-### Why GSAP?
-- Now 100% free (Webflow acquisition 2025)
-- ScrollTrigger is best-in-class
-- Framework-agnostic
-- Rich feature set (SplitText, timelines)
-
-### Why Tailwind v4?
-- CSS-first configuration via @theme
-- Vite plugin integration with Astro
-- Faster builds than v3 PostCSS approach
-
 ## Implementation Checklist
 
-### Phase 1: Foundation ✅ / 🚧 / ⏸️
-- [ ] Initialize Astro project
-- [ ] Install dependencies (three, gsap, tailwindcss, @tailwindcss/vite)
-- [ ] Configure astro.config.mjs (site, Vite plugins, integrations)
-- [ ] Set up Tailwind v4 with custom theme
-- [ ] Create public/CNAME file
-- [ ] Update .gitignore
+### Phase 1: Foundation ✅
+- [x] Initialize Astro project
+- [x] Install dependencies (three, gsap, tailwindcss, @tailwindcss/vite)
+- [x] Configure astro.config.mjs (site, Vite plugins, integrations)
+- [x] Set up Tailwind v4 with custom theme
+- [x] Create public/CNAME file
+- [x] Update .gitignore
 
-### Phase 2: Core Layout
-- [ ] Create src/layouts/BaseLayout.astro
-- [ ] Build responsive navigation (glassmorphism, mobile menu)
-- [ ] Add View Transitions API
-- [ ] Create Footer component
-- [ ] Set up global styles (oklch colors, typography, glow utilities)
+### Phase 2: Core Layout ✅
+- [x] Create src/layouts/BaseLayout.astro with SEO meta tags
+- [x] Build responsive navigation (glassmorphism, mobile menu)
+- [x] Create Footer component with social links
+- [x] Set up global styles (oklch colors, typography, glow utilities)
 
-### Phase 3: Hero Section (Three.js)
-- [ ] Create StarfieldHero.astro component
-- [ ] Implement Three.js particle system (BufferGeometry + Points)
-- [ ] Add mouse parallax effect
-- [ ] Add responsive resize handler
-- [ ] Performance optimization (reduce particles on mobile)
-- [ ] Respect prefers-reduced-motion
-- [ ] Overlay text with GSAP SplitText animation
+### Phase 3: Hero Section (Three.js) ✅
+- [x] Create StarfieldHero.astro component
+- [x] Implement Three.js particle system with 3000 stars
+- [x] Add mouse parallax effect
+- [x] Add responsive resize handler
+- [x] Performance optimization (reduce particles to 1000 on low-end devices)
+- [x] Respect prefers-reduced-motion
+- [x] Overlay text with GSAP entrance animations
 
-### Phase 4: Experience Timeline
-- [ ] Create ExperienceCard.astro component
-- [ ] Build vertical timeline layout
-- [ ] Add company data:
-  - Juniper Creates (May-Jul 2025)
-  - Meta Reality Labs (Aug 2023-May 2025)
-  - d1g1t Inc. (Oct 2022-Aug 2023)
-  - RBC (Jun 2021-Oct 2022)
-  - Microsoft (Jun 2018-May 2021)
-  - Internships (expandable)
-- [ ] GSAP ScrollTrigger entrance animations
-- [ ] Tech stack pills with hover effects
-- [ ] Phase tags (0→1, 1→N, N→N+1)
+### Phase 4: Experience Timeline ✅
+- [x] Create ExperienceCard.astro component
+- [x] Build vertical timeline layout with alternating cards
+- [x] Add 7 companies + 5 internships (expandable)
+- [x] GSAP ScrollTrigger entrance animations with stagger
+- [x] Tech stack pills (TechPill.astro component)
+- [x] Phase tags (0→1, 1→N, N→N+1) with color coding
+- [x] Timeline line with glowing dots
 
-### Phase 5: Products Showcase
-- [ ] Create ProjectCard.astro component
-- [ ] Build responsive grid layout
-- [ ] Add product data:
-  - Lettucemeet (200K+ MAU)
-  - Staunq Trading Chatbot
-  - Market Predictor Neural Network
-- [ ] Glassmorphism card styling
-- [ ] Hover glow animations
-- [ ] GSAP scroll-triggered reveals
+### Phase 5: Products Showcase ✅
+- [x] Create ProductCard.astro component
+- [x] Build responsive 3-column grid
+- [x] Add 3 products (Lettucemeet, Staunq, Market Predictor)
+- [x] Glassmorphism card styling
+- [x] Hover glow animations
+- [x] GSAP scroll-triggered reveals with stagger
+- [x] CTA buttons (View Live / View Code)
 
-### Phase 6: Games Section (Endeavor)
-- [ ] Create GameShowcase.astro component
-- [ ] Full-width cinematic layout
+### Phase 6: Games Section (Endeavor) ✅
+- [x] Create GameShowcase.astro component
+- [x] Full-width cinematic layout
+- [x] Animated shimmer gradient on title
+- [x] Feature highlights grid (4 features)
+- [x] CTA buttons (Steam, shrey.games)
+- [x] Social links (Discord, Twitter, YouTube)
+- [x] Dev log preview section
+
+### Phase 7: Blog Setup ✅
+- [x] Configure content collections (src/content.config.ts)
+- [x] Create blog listing page (src/pages/blog/index.astro)
+- [x] Create blog post template (src/pages/blog/[...slug].astro)
+- [x] Write 3 sample MDX posts:
+  - Welcome to My Portfolio
+  - Building Endeavor with Rust and Bevy
+  - Scaling React Apps at Meta
+- [x] Blog card styling with glassmorphism
+- [x] Tag display and date formatting
+- [x] Prose styling for MDX content
+
+### Phase 8: About Section ✅
+- [x] Create AboutSection.astro component
+- [x] Personal background and bio
+- [x] Education section (University of Waterloo)
+- [x] Awards & Recognition (3 awards)
+- [x] Skills grid organized by category:
+  - Full-Stack, Backend, DevOps, Game Dev
+  - Mobile, Databases, AR/VR, Tools
+- [x] GSAP ScrollTrigger animations
+- [x] Update navigation to include About link
 - [ ] Background video/GIF from shrey.games
 - [ ] Animated title with glow effect
 - [ ] CTA buttons (Steam, shrey.games)

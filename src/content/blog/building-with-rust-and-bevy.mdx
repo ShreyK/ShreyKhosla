@@ -1,0 +1,102 @@
+---
+title: "Building Endeavor: A Deep Space Game with Rust and Bevy"
+description: "Lessons learned from building a cross-platform 3D game using Rust and the Bevy game engine"
+pubDate: 2026-01-15
+author: "Shrey Khosla"
+tags: ["rust", "bevy", "game-dev", "endeavor"]
+---
+
+# Building Endeavor: A Deep Space Game with Rust and Bevy
+
+For the past year, I've been working on **Endeavor**, a procedurally generated deep space game built entirely with **Rust** and the **Bevy Engine**. Here's what I've learned along the way.
+
+## Why Rust for Game Development?
+
+Coming from a background in TypeScript, Python, and C++, Rust offered something unique:
+
+- **Memory Safety**: No null pointer crashes or data races
+- **Performance**: Zero-cost abstractions with C++-level speed
+- **Fearless Concurrency**: Easily parallelize game systems
+- **Great Tooling**: Cargo makes dependency management a breeze
+
+## The Bevy Engine
+
+Bevy is a data-driven game engine that uses an **Entity Component System (ECS)** architecture. Some highlights:
+
+### ECS Benefits
+
+```rust
+// Define components
+#[derive(Component)]
+struct Velocity(Vec3);
+
+#[derive(Component)]
+struct Position(Vec3);
+
+// Systems automatically process entities with matching components
+fn movement_system(
+    time: Res<Time>,
+    mut query: Query<(&mut Position, &Velocity)>,
+) {
+    for (mut pos, vel) in query.iter_mut() {
+        pos.0 += vel.0 * time.delta_seconds();
+    }
+}
+```
+
+This architecture makes it easy to:
+- Add new behaviors without modifying existing code
+- Parallelize systems automatically
+- Serialize/deserialize game state
+
+### Procedural Universe Generation
+
+One of Endeavor's core features is infinite procedural generation:
+
+- **Seeded RNG**: Consistent universe across sessions
+- **Chunk Loading**: Dynamic spatial partitioning
+- **Star Systems**: Procedurally placed stars, planets, stations
+- **Sentient Entities**: AI-driven ships with emergent behavior
+
+## Challenges and Solutions
+
+### 1. Ship Combat Complexity
+
+Initial combat was too complex. Solution:
+- Simplified to energy management system
+- Clear visual feedback for weapon status
+- Predictable enemy behavior patterns
+
+### 2. Cross-Platform Rendering
+
+Different hardware capabilities required:
+- Dynamic quality settings
+- Shader variants for different platforms
+- Graceful degradation on low-end systems
+
+### 3. Physics Simulation
+
+N-body physics for realistic orbital mechanics:
+- Barnes-Hut algorithm for O(n log n) complexity
+- Fixed timestep for deterministic simulation
+- Interpolation for smooth rendering
+
+## What's Next?
+
+Current focus areas:
+- Steam release preparation
+- Multiplayer foundation (using [Lightyear](https://github.com/cBournhonesque/lightyear))
+- More variety in procedural content
+- Enhanced AI for sentient entities
+
+## Try It Out
+
+Endeavor is available now:
+- **Steam**: [Coming Soon](https://store.steampowered.com)
+- **Itch.io**: [shrey.games](https://shrey.games)
+
+Follow development updates on [Twitter](https://twitter.com/shreykhosla) and [Discord](https://discord.gg/endeavor).
+
+---
+
+Questions about Rust game dev or Bevy? Feel free to reach out!

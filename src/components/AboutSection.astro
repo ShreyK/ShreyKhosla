@@ -1,0 +1,179 @@
+---
+// About Section - Background, Education, Skills
+import TechPill from './TechPill.astro';
+
+const skills = {
+  'Full-Stack': ['React', 'TypeScript', 'Node.js', 'Next.js', 'Astro', 'GraphQL', 'Relay', 'Redux'],
+  'Backend': ['Python', 'Django', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis', 'REST', 'gRPC'],
+  'DevOps': ['Docker', 'Kubernetes', 'AWS', 'GCP', 'CI/CD', 'GitHub Actions', 'Terraform'],
+  'Game Dev': ['Rust', 'Bevy Engine', 'C++', 'Unity', 'Three.js', 'WebGL', 'Shaders'],
+  'Mobile': ['React Native', 'Android', 'Kotlin', 'Java', 'JNI', 'iOS', 'Swift'],
+  'Databases': ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'DynamoDB', 'Elasticsearch'],
+  'AR/VR': ['Meta SDKs', 'ARCore', 'Unity XR', '3D Math', 'Computer Vision'],
+  'Tools': ['Git', 'Webpack', 'Vite', 'Jest', 'Playwright', 'Figma', 'Linear'],
+};
+
+const education = {
+  school: 'University of Waterloo',
+  degree: 'Bachelor of Applied Science',
+  major: 'Computer Engineering',
+  minor: 'Business',
+  graduated: '2018',
+  location: 'Waterloo, ON, Canada',
+};
+
+const awards = [
+  "President's Entrance Scholarship ($2,000)",
+  'Engineering International Experience Award',
+  'Outstanding Co-Op Student Award',
+];
+---
+
+<section id="about" class="relative py-20 px-4 overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute top-40 right-20 w-96 h-96 bg-accent-purple rounded-full opacity-5 blur-3xl"></div>
+    <div class="absolute bottom-40 left-20 w-80 h-80 bg-accent-cyan rounded-full opacity-5 blur-3xl"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6 glow-text">About Me</h2>
+      <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+        A passion for building products that scale, from 0→1 startups to N→N+1 enterprise solutions
+      </p>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+      <!-- Left: Bio -->
+      <div class="space-y-6">
+        <div class="glassmorphism glow-border rounded-lg p-6">
+          <h3 class="text-2xl font-bold mb-4 text-text-primary">Background</h3>
+          <div class="space-y-4 text-text-secondary leading-relaxed">
+            <p>
+              I'm a <strong class="text-text-primary">Senior Software Engineer</strong> with 7+ years of experience 
+              building products across startups and enterprise companies. My journey has taken me through diverse domains—from 
+              <span class="text-accent-cyan">AR/VR research at Meta</span> to 
+              <span class="text-accent-cyan">fintech platforms at RBC</span> and 
+              <span class="text-accent-cyan">game development</span> in my spare time.
+            </p>
+            <p>
+              I thrive in ambiguous environments where I can architect solutions from scratch, whether it's 
+              launching a full-stack Memory application at Meta or building a procedurally generated space game with Rust.
+            </p>
+            <p>
+              Beyond coding, I'm passionate about <span class="text-accent-cyan">mentorship</span>, having guided engineers 
+              across North America and offshore teams. I believe in writing clean, maintainable code and shipping features 
+              that users love.
+            </p>
+          </div>
+        </div>
+
+        <!-- Awards -->
+        <div class="glassmorphism glow-border rounded-lg p-6">
+          <h3 class="text-2xl font-bold mb-4 text-text-primary flex items-center gap-2">
+            <svg class="w-6 h-6 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+            Awards & Recognition
+          </h3>
+          <ul class="space-y-2">
+            {awards.map((award) => (
+              <li class="flex items-start gap-2 text-text-secondary">
+                <span class="text-accent-cyan text-lg flex-shrink-0">►</span>
+                <span>{award}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: Education -->
+      <div class="space-y-6">
+        <div class="glassmorphism glow-border rounded-lg p-6">
+          <h3 class="text-2xl font-bold mb-6 text-text-primary flex items-center gap-2">
+            <svg class="w-6 h-6 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+            </svg>
+            Education
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <h4 class="text-xl font-bold text-accent-cyan mb-1">{education.school}</h4>
+              <p class="text-text-primary font-semibold">{education.degree}</p>
+              <p class="text-text-secondary">
+                {education.major} • Minor in {education.minor}
+              </p>
+              <div class="flex items-center gap-4 mt-2 text-sm text-text-muted">
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Graduated {education.graduated}
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  {education.location}
+                </span>
+              </div>
+            </div>
+
+            <!-- Co-op Program Highlight -->
+            <div class="mt-6 pt-6 border-t border-accent-blue/30">
+              <p class="text-text-secondary text-sm leading-relaxed">
+                Completed <strong class="text-text-primary">5 co-op terms</strong> at companies including 
+                Microsoft, theScore, KnowRoaming, Uken Games, and UW HCI Lab—gaining diverse experience 
+                in full-stack development, mobile apps, DevOps, and game development.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="glassmorphism glow-border rounded-lg p-8">
+      <h3 class="text-3xl font-bold mb-8 text-center text-text-primary">Technical Skills</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {Object.entries(skills).map(([category, techs]) => (
+          <div class="space-y-3">
+            <h4 class="text-lg font-bold text-accent-cyan border-b border-accent-blue/30 pb-2">
+              {category}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {techs.map((tech) => (
+                <TechPill label={tech} variant="secondary" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate about section elements on scroll
+  gsap.from('#about .glassmorphism', {
+    scrollTrigger: {
+      trigger: '#about',
+      start: 'top 80%',
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: 'power3.out',
+  });
+</script>
