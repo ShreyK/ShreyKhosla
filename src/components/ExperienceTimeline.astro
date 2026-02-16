@@ -162,29 +162,29 @@ const internships = [
 ];
 ---
 
-<section id="experience" class="py-20 px-4 relative overflow-hidden">
+<section id="experience" class="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
   <!-- Background gradient -->
   <div class="absolute inset-0 bg-gradient-to-b from-space-black via-space-navy/30 to-space-black pointer-events-none"></div>
   
   <div class="max-w-6xl mx-auto relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Experience</h2>
-      <p class="text-xl text-text-secondary">7+ years building products across startups and enterprise</p>
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-text-primary">Experience</h2>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto">7+ years building products across startups and enterprise</p>
     </div>
 
     <!-- Timeline Line (Desktop) -->
     <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-accent-blue/50 to-transparent h-full top-0"></div>
 
     <!-- Experience Cards -->
-    <div class="space-y-8">
+    <div class="space-y-12 md:space-y-16">
       {experiences.map((exp, index) => (
         <ExperienceCard {...exp} side={index % 2 === 0 ? 'left' : 'right'} />
       ))}
     </div>
 
     <!-- Internships Section (Expandable) -->
-    <div class="mt-16 glassmorphism p-6 rounded-lg border border-accent-purple/20">
+    <div class="mt-20 glassmorphism p-6 md:p-8 rounded-lg border border-accent-purple/20 mx-auto max-w-4xl">
       <details class="internships-details">
         <summary class="text-2xl font-bold text-text-primary cursor-pointer hover:text-accent-cyan transition-colors flex items-center justify-between">
           <span>Internships & Co-op Experiences</span>
@@ -192,7 +192,7 @@ const internships = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="mt-8 space-y-8">
+        <div class="mt-8 space-y-12">
           {internships.map((intern, index) => (
             <ExperienceCard {...intern} side={index % 2 === 0 ? 'left' : 'right'} />
           ))}

@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, type CollectionEntry, render } from 'astro:content';
+import { getCollection, type CollectionEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 // Generate static paths for all blog posts
@@ -23,8 +23,8 @@ const { Content } = await render(entry);
   title={`${entry.data.title} | Shrey Khosla`}
   description={entry.data.description}
 >
-  <article class="min-h-screen py-20 px-4">
-    <div class="max-w-3xl mx-auto">
+  <article class="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
       <!-- Back to Blog -->
       <div class="mb-8">
         <a 
@@ -82,19 +82,20 @@ const { Content } = await render(entry);
       </header>
 
       <!-- Article Content -->
-      <div class="prose prose-invert prose-lg max-w-none">
+      <div class="blog-content max-w-none text-base md:text-lg">
         <Content />
       </div>
 
       <!-- Article Footer -->
       <footer class="mt-16 pt-8 border-t border-accent-blue/30">
         <div class="text-center">
-          <p class="text-text-secondary mb-4">
+          <p class="text-text-secondary mb-6">
             Thanks for reading! Have questions or feedback?
           </p>
           <a 
             href="/#contact" 
-            class="inline-block px-6 py-3 bg-accent-blue text-white rounded-lg hover:bg-accent-cyan transition-colors font-semibold shadow-lg shadow-accent-blue/50"
+            class="inline-block px-8 py-4 bg-accent-blue rounded-lg hover:bg-accent-cyan transition-colors font-semibold shadow-lg shadow-accent-blue/50 min-w-[200px]"
+            style="color: oklch(1.0 0 0);"
           >
             Get in Touch
           </a>

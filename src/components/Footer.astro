@@ -25,19 +25,19 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-space-dark border-t border-accent-blue/10 py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<footer class="bg-space-dark border-t border-accent-blue/10 py-12 md:py-16 mt-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
       <!-- Brand -->
-      <div>
+      <div class="text-center">
         <h3 class="text-2xl font-bold text-text-primary mb-4">Shrey Khosla</h3>
-        <p class="text-text-secondary">
+        <p class="text-text-secondary leading-relaxed">
           Senior Software Engineer building products from 0→1 to N→N+1
         </p>
       </div>
 
       <!-- Quick Links -->
-      <div>
+      <div class="text-center">
         <h4 class="text-lg font-semibold text-text-primary mb-4">Quick Links</h4>
         <ul class="space-y-2">
           <li>
@@ -64,9 +64,9 @@ const socialLinks = [
       </div>
 
       <!-- Connect -->
-      <div>
+      <div class="text-center">
         <h4 class="text-lg font-semibold text-text-primary mb-4">Connect</h4>
-        <div class="flex space-x-4">
+        <div class="flex space-x-4 justify-center">
           {socialLinks.map((link) => (
             <a
               href={link.url}
@@ -82,11 +82,11 @@ const socialLinks = [
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-accent-blue/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-      <p class="text-text-muted text-sm">
+    <div class="border-t border-accent-blue/10 pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
+      <p class="text-text-muted text-sm text-center">
         © {currentYear} Shrey Khosla. All rights reserved.
       </p>
-      <p class="text-text-muted text-sm mt-4 md:mt-0">
+      <p class="text-text-muted text-sm text-center">
         Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">Astro</a>
       </p>
     </div>

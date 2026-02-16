@@ -29,7 +29,7 @@ const awards = [
 ];
 ---
 
-<section id="about" class="relative py-20 px-4 overflow-hidden">
+<section id="about" class="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
   <!-- Background Elements -->
   <div class="absolute inset-0 -z-10">
     <div class="absolute top-40 right-20 w-96 h-96 bg-accent-purple rounded-full opacity-5 blur-3xl"></div>
@@ -38,18 +38,18 @@ const awards = [
 
   <div class="max-w-6xl mx-auto">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-5xl md:text-6xl font-bold mb-6 glow-text">About Me</h2>
-      <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 glow-text">About Me</h2>
+      <p class="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
         A passion for building products that scale, from 0→1 startups to N→N+1 enterprise solutions
       </p>
     </div>
 
     <!-- Content Grid -->
-    <div class="grid md:grid-cols-2 gap-12 mb-16">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 mb-20">
       <!-- Left: Bio -->
-      <div class="space-y-6">
-        <div class="glassmorphism glow-border rounded-lg p-6">
+      <div class="space-y-8">
+        <div class="glassmorphism glow-border rounded-lg p-6 md:p-8">
           <h3 class="text-2xl font-bold mb-4 text-text-primary">Background</h3>
           <div class="space-y-4 text-text-secondary leading-relaxed">
             <p>
@@ -72,7 +72,7 @@ const awards = [
         </div>
 
         <!-- Awards -->
-        <div class="glassmorphism glow-border rounded-lg p-6">
+        <div class="glassmorphism glow-border rounded-lg p-6 md:p-8">
           <h3 class="text-2xl font-bold mb-4 text-text-primary flex items-center gap-2">
             <svg class="w-6 h-6 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -91,8 +91,8 @@ const awards = [
       </div>
 
       <!-- Right: Education -->
-      <div class="space-y-6">
-        <div class="glassmorphism glow-border rounded-lg p-6">
+      <div class="space-y-8">
+        <div class="glassmorphism glow-border rounded-lg p-6 md:p-8">
           <h3 class="text-2xl font-bold mb-6 text-text-primary flex items-center gap-2">
             <svg class="w-6 h-6 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -138,9 +138,9 @@ const awards = [
     </div>
 
     <!-- Skills Grid -->
-    <div class="glassmorphism glow-border rounded-lg p-8">
-      <h3 class="text-3xl font-bold mb-8 text-center text-text-primary">Technical Skills</h3>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="glassmorphism glow-border rounded-lg p-6 md:p-10">
+      <h3 class="text-2xl md:text-3xl font-bold mb-10 text-center text-text-primary">Technical Skills</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {Object.entries(skills).map(([category, techs]) => (
           <div class="space-y-3">
             <h4 class="text-lg font-bold text-accent-cyan border-b border-accent-blue/30 pb-2">

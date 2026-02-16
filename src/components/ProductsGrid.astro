@@ -8,41 +8,38 @@ const products: ProductData[] = [
     metrics: '200K+ Monthly Active Users',
     techStack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Docker', 'AWS ECS', 'SASS'],
     liveUrl: 'https://lettucemeet.com',
-    image: '/images/lettucemeet-preview.jpg',
   },
   {
     name: 'Staunq Trading Chatbot',
     description: 'Cryptocurrency + AI Chatbot App combining real-time market data with conversational AI. Integrated with OpenAI\'s GPT-3 and Binance API for latest candlestick and orderbook data, enabling natural language access to crypto markets.',
     techStack: ['Next.js', 'React', 'OpenAI GPT-3', 'Binance API', 'Vercel', 'Serverless Functions'],
     githubUrl: 'https://github.com/ShreyK/staunq',
-    image: '/images/staunq-preview.jpg',
   },
   {
     name: 'Market Predictor Neural Network',
     description: 'Machine learning project using TensorFlow and Keras LSTM-RNN models to predict cryptocurrency prices. Trained on 4 years of daily BTC and ETH data with pandas and sklearn for data cleansing, filtering, and normalization.',
     techStack: ['Python', 'TensorFlow', 'Keras LSTM', 'pandas', 'sklearn', 'NumPy'],
     githubUrl: 'https://github.com/ShreyK/mp',
-    image: '/images/market-predictor-preview.jpg',
   },
 ];
 ---
 
-<section id="products" class="py-20 px-4 bg-gradient-to-b from-space-black to-space-navy relative overflow-hidden">
+<section id="products" class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-space-black to-space-navy relative overflow-hidden">
   <!-- Decorative elements -->
   <div class="absolute inset-0 opacity-10 pointer-events-none">
     <div class="absolute top-20 left-10 w-64 h-64 bg-accent-blue rounded-full blur-3xl"></div>
     <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-purple rounded-full blur-3xl"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto relative z-10">
+  <div class="max-w-6xl mx-auto relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-text-primary">Products</h2>
-      <p class="text-xl text-text-secondary">Passion projects that scaled to real-world impact</p>
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-text-primary">Products</h2>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">Passion projects that scaled to real-world impact</p>
     </div>
 
     <!-- Products Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
       {products.map((product) => (
         <ProductCard {...product} />
       ))}
