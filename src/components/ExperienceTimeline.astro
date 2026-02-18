@@ -84,82 +84,6 @@ const experiences: ExperienceData[] = [
     techStack: ['React', 'JavaScript', 'TypeScript', 'KnockoutJS', 'Redux', 'C#', 'C++', 'Java', 'Kotlin', 'UWP'],
   },
 ];
-
-const internships = [
-  {
-    company: 'Microsoft',
-    role: 'Software Engineering Intern',
-    startDate: 'Sept 2017',
-    endDate: 'Dec 2017',
-    phase: 'N→N+1' as const,
-    description: '3D Viewer (UWP): Creative design process research for 3DFE ecosystem. Reduced release package size from 100MB to 27MB. Built prototype A/B experimentation infrastructure.',
-    achievements: [
-      'Reduced app package size from 100MB to 27MB',
-      'Built prototype A/B experimentation infrastructure',
-      'Performed data analysis on 10,000+ 3D models using PowerShell + C++ tools',
-      'Built 3D Asset Importer DLL for HoloLens project',
-    ],
-    techStack: ['C#', 'C++', 'UWP', 'HoloLens', 'PowerShell'],
-  },
-  {
-    company: 'theScore Inc.',
-    role: 'Android Engineering Intern',
-    startDate: 'May 2016',
-    endDate: 'Aug 2016',
-    phase: '1→N' as const,
-    description: 'Refactored major parts of the app for lightweight, efficient, and user-friendly experience.',
-    achievements: [
-      'Added Spoiler Mode feature',
-      'Implemented Dynamic Coachmarks',
-      'Built Localization support into CI/CD pipeline',
-    ],
-    techStack: ['Android', 'Java', 'CI/CD'],
-  },
-  {
-    company: 'KnowRoaming',
-    role: 'Android Engineering Intern',
-    startDate: 'Sept 2015',
-    endDate: 'Dec 2015',
-    phase: '0→1' as const,
-    description: 'Redesigned and rebuilt entire Android App for Android 5.0 Material Design update.',
-    achievements: [
-      'Redesigned and rebuilt entire Android App for Material Design',
-      'Solo developer on e-Sim sample app presented to Telna',
-      'Added backend support for SMS verification and account management',
-    ],
-    techStack: ['Android', 'Java', 'Material Design'],
-  },
-  {
-    company: 'Uken Games',
-    role: 'QA Analyst',
-    startDate: 'Jan 2015',
-    endDate: 'May 2015',
-    phase: '1→N' as const,
-    description: 'Game design and development. Pair programming to develop prototype.',
-    achievements: [
-      'Game design from brainstorming to prototype development',
-      'Pair programming using JavaScript ES6 (Frontend) and Ruby on Rails (Backend)',
-      'Testing 7 HTML5 games across multiple platforms (Android, iOS, Blackberry, Amazon, Windows)',
-      'Automated smoke testing using Selenium',
-    ],
-    techStack: ['JavaScript ES6', 'Ruby on Rails', 'Selenium', 'QA'],
-  },
-  {
-    company: 'University of Waterloo - HCI Research',
-    role: 'Research Development Intern',
-    startDate: 'May 2014',
-    endDate: 'Aug 2014',
-    phase: '0→1' as const,
-    description: 'Human Computer Interaction research. Built 3D Aware Application for PhD thesis on "Large Scale displays in Public Areas".',
-    achievements: [
-      'Built 3D Aware Application using Kinect device, smart projector, and laptop',
-      'Developed with Processing (OpenGL interops) and Kinect SDK',
-      'Setup and ran experiments for multi-device military simulation software',
-      'Taught Programming 101 to 70+ individuals at Games Institute Jam',
-    ],
-    techStack: ['Processing', 'OpenGL', 'Kinect SDK', 'Java', 'HCI Research'],
-  },
-];
 ---
 
 <section id="experience" class="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -188,24 +112,6 @@ const internships = [
       </div>
     </div>
 
-    <!-- Internships Section (Expandable) -->
-    <div class="mt-20 glassmorphism p-6 md:p-8 rounded-lg border border-accent-purple/20 mx-auto max-w-4xl">
-      <details class="internships-details">
-        <summary class="text-2xl font-bold text-text-primary cursor-pointer hover:text-accent-cyan transition-colors flex items-center justify-between">
-          <span>Internships & Co-op Experiences</span>
-          <svg class="w-6 h-6 transition-transform duration-300 details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </summary>
-        <div class="mt-8 flex flex-col space-y-12">
-          {internships.map((intern, index) => (
-            <div class={`flex w-full ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-              <ExperienceCard {...intern} side={index % 2 === 0 ? 'left' : 'right'} />
-            </div>
-          ))}
-        </div>
-      </details>
-    </div>
   </div>
 </section>
 
