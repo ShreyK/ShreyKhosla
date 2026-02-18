@@ -50,6 +50,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     
     <!-- View Transitions API -->
     <meta name="view-transition" content="same-origin" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D45D8VWLQB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-D45D8VWLQB');
+    </script>
   </head>
   <body>
     <Navbar />
