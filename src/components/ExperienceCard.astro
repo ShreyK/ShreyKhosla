@@ -19,48 +19,42 @@ interface Props extends ExperienceData {
 
 const { company, role, startDate, endDate, phase, description, achievements, techStack, side } = Astro.props;
 
-const phaseColors: Record<string, string> = {
-  '0→1': 'bg-green-500/20 text-green-400 border-green-500/30',
-  '1→N': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  'N→N+1': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-};
-
-const phaseColorClass = phaseColors[phase] || '';
+const phaseClass = {
+  '0→1': 'phase-start',
+  '1→N': 'phase-growth',
+  'N→N+1': 'phase-scale',
+}[phase] ?? 'phase-start';
 ---
 
-<div class={`experience-card relative w-full md:w-[calc(50%-2rem)] ${side === 'left' ? 'md:pr-8' : 'md:pl-8'}`}>
+<div class={`experience-card ${side === 'left' ? 'card-left' : 'card-right'}`}>
   <!-- Timeline Dot (Desktop) -->
-  <div class={`timeline-dot hidden md:block absolute top-10 w-4 h-4 rounded-full bg-accent-blue glow-dot transition-all duration-300 z-10 ${side === 'left' ? '-right-8 translate-x-1/2' : '-left-8 -translate-x-1/2'}`}></div>
+  <div class="timeline-dot"></div>
 
   <!-- Card Content -->
-  <div class="experience-card-content glassmorphism p-10 md:p-12 rounded-lg border border-accent-blue/20 hover:border-accent-blue/40 transition-all duration-300 opacity-0">
-    <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
-      <div class="flex-1">
-        <h3 class="text-2xl font-bold text-text-primary mb-1">{company}</h3>
-        <p class="text-lg text-accent-blue font-semibold">{role}</p>
-        <p class="text-sm text-text-muted">{startDate} - {endDate}</p>
+  <div class="experience-card-content glassmorphism">
+    <div class="card-header">
+      <div class="card-meta">
+        <h3 class="card-company">{company}</h3>
+        <p class="card-role">{role}</p>
+        <p class="card-dates">{startDate} - {endDate}</p>
       </div>
-      <span class={`inline-block px-3 py-1 rounded-full text-sm font-semibold border ${phaseColorClass}`}>
-        {phase}
-      </span>
+      <span class={`phase-badge ${phaseClass}`}>{phase}</span>
     </div>
 
-    <p class="text-text-secondary mb-4 leading-relaxed">
-      {description}
-    </p>
+    <p class="card-description">{description}</p>
 
     {achievements && achievements.length > 0 && (
-      <ul class="space-y-2 mb-4">
+      <ul class="achievements-list">
         {achievements.map((achievement) => (
-          <li class="text-text-secondary text-sm flex items-start">
-            <span class="text-accent-cyan mr-2 flex-shrink-0">▸</span>
+          <li class="achievement-item">
+            <span class="achievement-bullet">▸</span>
             <span>{achievement}</span>
           </li>
         ))}
       </ul>
     )}
 
-    <div class="flex flex-wrap gap-2 mt-4 ">
+    <div class="tech-stack">
       {techStack.map((tech) => (
         <TechPill label={tech} />
       ))}
@@ -69,21 +63,177 @@ const phaseColorClass = phaseColors[phase] || '';
 </div>
 
 <style>
-  .glow-dot {
-    box-shadow: 0 0 10px var(--color-accent-blue),
-                0 0 20px var(--color-accent-blue);
+  .experience-card {
+    position: relative;
+    width: 100%;
   }
 
-  .experience-card:hover .glow-dot {
-    box-shadow: 0 0 15px var(--color-accent-blue),
-                0 0 30px var(--color-accent-blue),
-                0 0 45px var(--color-accent-blue);
-    transform: scale(1.2);
-  }
-
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     .experience-card {
-      padding: 0;
+      width: calc(50% - 2rem);
     }
+    .experience-card.card-left {
+      padding-right: 2rem;
+    }
+    .experience-card.card-right {
+      padding-left: 2rem;
+    }
+  }
+
+  .timeline-dot {
+    display: none;
+    position: absolute;
+    top: 2.5rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    background: var(--color-accent-blue);
+    box-shadow:
+      0 0 10px var(--color-accent-blue),
+      0 0 20px var(--color-accent-blue);
+    transition: all 300ms;
+    z-index: 10;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-dot {
+      display: block;
+    }
+    .card-left .timeline-dot {
+      right: -2rem;
+      transform: translateX(50%);
+    }
+    .card-right .timeline-dot {
+      left: -2rem;
+      transform: translateX(-50%);
+    }
+    .card-left:hover .timeline-dot {
+      box-shadow:
+        0 0 15px var(--color-accent-blue),
+        0 0 30px var(--color-accent-blue),
+        0 0 45px var(--color-accent-blue);
+      transform: translateX(50%) scale(1.2);
+    }
+    .card-right:hover .timeline-dot {
+      box-shadow:
+        0 0 15px var(--color-accent-blue),
+        0 0 30px var(--color-accent-blue),
+        0 0 45px var(--color-accent-blue);
+      transform: translateX(-50%) scale(1.2);
+    }
+  }
+
+  .experience-card-content {
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid oklch(from var(--color-accent-blue) l c h / 0.2);
+    opacity: 0;
+    transition: all 300ms;
+  }
+
+  @media (min-width: 768px) {
+    .experience-card-content {
+      padding: 3rem;
+    }
+  }
+
+  .experience-card-content:hover {
+    border-color: oklch(from var(--color-accent-blue) l c h / 0.4);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .card-meta {
+    flex: 1;
+  }
+
+  .card-company {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .card-role {
+    font-size: 1.125rem;
+    color: var(--color-accent-blue);
+    font-weight: 600;
+  }
+
+  .card-dates {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .phase-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    flex-shrink: 0;
+  }
+
+  /* oklch green ≈ 120° hue */
+  .phase-badge.phase-start {
+    background: oklch(0.55 0.18 145 / 0.2);
+    color: oklch(0.72 0.15 145);
+    border-color: oklch(0.55 0.18 145 / 0.3);
+  }
+
+  /* oklch blue ≈ 240° hue */
+  .phase-badge.phase-growth {
+    background: oklch(0.55 0.20 240 / 0.2);
+    color: oklch(0.70 0.18 240);
+    border-color: oklch(0.55 0.20 240 / 0.3);
+  }
+
+  /* oklch purple ≈ 290° hue */
+  .phase-badge.phase-scale {
+    background: oklch(0.55 0.20 290 / 0.2);
+    color: oklch(0.70 0.18 290);
+    border-color: oklch(0.55 0.20 290 / 0.3);
+  }
+
+  .card-description {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.625;
+  }
+
+  .achievements-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .achievement-item {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .achievement-bullet {
+    color: var(--color-accent-cyan);
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 </style>

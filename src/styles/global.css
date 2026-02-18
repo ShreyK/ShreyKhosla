@@ -1,7 +1,5 @@
-@import "tailwindcss";
-
-/* Custom Theme - Dark Futuristic Design */
-@theme {
+/* Design Tokens */
+:root {
     /* Color Palette using oklch() */
     --color-space-black: oklch(0.10 0.01 240);
     --color-space-dark: oklch(0.15 0.02 240);
@@ -31,11 +29,16 @@
     inherits: false;
 }
 
-/* Global Styles */
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {

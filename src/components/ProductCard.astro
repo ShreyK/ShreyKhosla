@@ -16,47 +16,46 @@ interface Props extends ProductData {}
 const { name, description, metrics, techStack, liveUrl, githubUrl, image } = Astro.props;
 ---
 
-<div class="product-card glassmorphism rounded-lg overflow-hidden border border-accent-blue/20 hover:border-accent-blue/50 transition-all duration-300 group opacity-0 flex flex-col h-full">
+<div class="product-card glassmorphism">
   <!-- Image/Visual -->
-  <div class="product-image relative bg-gradient-to-br from-space-navy to-space-dark aspect-video overflow-hidden">
+  <div class="product-image">
     {image ? (
-      <img src={image} alt={name} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+      <img src={image} alt={name} class="product-img" loading="lazy" />
     ) : (
-      <div class="w-full h-full flex items-center justify-center">
-        <div class="text-6xl md:text-7xl font-bold text-accent-blue/20 group-hover:text-accent-blue/40 transition-colors">
+      <div class="product-initial-wrap">
+        <div class="product-initial">
           {name.charAt(0)}
         </div>
       </div>
     )}
-    <div class="absolute inset-0 bg-gradient-to-t from-space-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <div class="image-overlay"></div>
   </div>
 
   <!-- Content -->
-  <div class="p-8 flex-1 flex flex-col">
-    <h3 class="text-2xl font-bold text-text-primary mb-2 group-hover:text-accent-cyan transition-colors">{name}</h3>
-    
+  <div class="product-content">
+    <h3 class="product-name">{name}</h3>
+
     {metrics && (
-      <p class="text-accent-blue font-semibold mb-3">{metrics}</p>
+      <p class="product-metrics">{metrics}</p>
     )}
-    
-    <p class="text-text-secondary mb-4 leading-relaxed flex-1">{description}</p>
+
+    <p class="product-description">{description}</p>
 
     <!-- Tech Stack -->
-    <div class="flex flex-wrap gap-2 mb-4">
+    <div class="product-tech">
       {techStack.map((tech) => (
         <TechPill label={tech} variant="secondary" />
       ))}
     </div>
 
     <!-- CTA Buttons -->
-    <div class="flex gap-4 mt-4">
+    <div class="product-ctas">
       {liveUrl && (
         <a
           href={liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex-1 px-6 py-4 bg-accent-blue rounded-lg hover:bg-accent-cyan hover:scale-105 transition-all duration-300 font-semibold text-center shadow-lg shadow-accent-blue/40 min-h-[56px] flex items-center justify-center"
-          style="color: oklch(1.0 0 0);"
+          class="cta-live"
         >
           View Live →
         </a>
@@ -66,7 +65,7 @@ const { name, description, metrics, techStack, liveUrl, githubUrl, image } = Ast
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex-1 px-6 py-4 glassmorphism glow-border rounded-lg hover:scale-105 transition-all duration-300 font-semibold text-center text-text-primary min-h-[56px] flex items-center justify-center"
+          class="cta-code glassmorphism glow-border"
         >
           View Code →
         </a>
@@ -77,6 +76,148 @@ const { name, description, metrics, techStack, liveUrl, githubUrl, image } = Ast
 
 <style>
   .product-card {
-    transform: translateY(20px);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid oklch(from var(--color-accent-blue) l c h / 0.2);
+    transition: all 300ms;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(20px); /* GSAP animates this in */
+  }
+
+  .product-card:hover {
+    border-color: oklch(from var(--color-accent-blue) l c h / 0.5);
+  }
+
+  .product-image {
+    position: relative;
+    background: linear-gradient(to bottom right, var(--color-space-navy), var(--color-space-dark));
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms;
+  }
+
+  .product-card:hover .product-img {
+    transform: scale(1.1);
+  }
+
+  .product-initial-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-initial {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: oklch(from var(--color-accent-blue) l c h / 0.2);
+    transition: color 300ms;
+  }
+
+  .product-card:hover .product-initial {
+    color: oklch(from var(--color-accent-blue) l c h / 0.4);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, oklch(from var(--color-space-black) l c h / 0.8), transparent);
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .product-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .product-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+    transition: color 300ms;
+  }
+
+  .product-card:hover .product-name {
+    color: var(--color-accent-cyan);
+  }
+
+  .product-metrics {
+    color: var(--color-accent-blue);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .product-description {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.625;
+    flex: 1;
+  }
+
+  .product-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-ctas {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .cta-live,
+  .cta-code {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 300ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.5rem;
+  }
+
+  .cta-live {
+    background: var(--color-accent-blue);
+    color: oklch(1.0 0 0);
+    box-shadow: 0 4px 6px oklch(from var(--color-accent-blue) l c h / 0.4);
+  }
+
+  .cta-live:hover {
+    background: var(--color-accent-cyan);
+    transform: scale(1.05);
+    color: oklch(1.0 0 0);
+    box-shadow: 0 4px 6px oklch(from var(--color-accent-blue) l c h / 0.5);
+  }
+
+  .cta-code {
+    color: var(--color-text-primary);
+  }
+
+  .cta-code:hover {
+    transform: scale(1.05);
+    color: var(--color-text-primary);
   }
 </style>

@@ -86,26 +86,26 @@ const experiences: ExperienceData[] = [
 ];
 ---
 
-<section id="experience" class="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+<section id="experience" class="experience-section">
   <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-b from-space-black via-space-navy/30 to-space-black pointer-events-none"></div>
+  <div class="section-bg"></div>
   
-  <div class="max-w-6xl mx-auto relative z-10">
+  <div class="section-inner">
     <!-- Section Header -->
-    <div class="text-center mb-20">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-text-primary">Experience</h2>
-      <p class="text-xl text-text-secondary max-w-2xl mx-auto">7+ years building products across startups and enterprise</p>
+    <div class="section-header">
+      <h2 class="section-title">Experience</h2>
+      <p class="section-subtitle">7+ years building products across startups and enterprise</p>
     </div>
 
     <!-- Experience Cards Container with Timeline -->
-    <div class="relative">
+    <div class="timeline-container">
       <!-- Timeline Line (Desktop) -->
-      <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-accent-blue/50 to-transparent h-full top-0"></div>
+      <div class="timeline-line"></div>
       
       <!-- Experience Cards -->
-      <div class="flex flex-col space-y-12 md:space-y-16">
+      <div class="cards-stack">
         {experiences.map((exp, index) => (
-          <div class={`flex w-full ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+          <div class={`card-row ${index % 2 === 0 ? 'align-start' : 'align-end'}`}>
             <ExperienceCard {...exp} side={index % 2 === 0 ? 'left' : 'right'} />
           </div>
         ))}
@@ -174,14 +174,117 @@ const experiences: ExperienceData[] = [
 </script>
 
 <style>
+  .experience-section {
+    padding: 6rem 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .experience-section { padding: 6rem 1.5rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .experience-section { padding: 6rem 2rem; }
+  }
+
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--color-space-black),
+      oklch(from var(--color-space-navy) l c h / 0.3),
+      var(--color-space-black)
+    );
+    pointer-events: none;
+  }
+
+  .section-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-primary);
+  }
+
+  @media (min-width: 768px) {
+    .section-title { font-size: 3rem; }
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .timeline-container {
+    position: relative;
+  }
+
+  .timeline-line {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100%;
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      oklch(from var(--color-accent-blue) l c h / 0.5),
+      transparent
+    );
+  }
+
+  @media (min-width: 768px) {
+    .timeline-line { display: block; }
+  }
+
+  .cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .cards-stack { gap: 4rem; }
+  }
+
+  .card-row {
+    display: flex;
+    width: 100%;
+  }
+
+  .card-row.align-start {
+    justify-content: flex-start;
+  }
+
+  .card-row.align-end {
+    justify-content: flex-end;
+  }
+
   details[open] summary {
     color: var(--color-accent-cyan);
   }
-  
+
   summary::marker {
     content: '';
   }
-  
+
   summary::-webkit-details-marker {
     display: none;
   }

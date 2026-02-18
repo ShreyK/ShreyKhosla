@@ -20,13 +20,13 @@ import Footer from '../components/Footer.astro';
 
     <GameShowcase />
 
-    <section id="contact" class="min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-space-black to-space-navy flex items-center justify-center">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-text-primary">Get in Touch</h2>
-        <p class="text-xl md:text-2xl text-text-secondary mb-12 leading-relaxed">
+    <section id="contact" class="contact-section">
+      <div class="contact-inner">
+        <h2 class="contact-title">Get in Touch</h2>
+        <p class="contact-sub">
           Let's build something amazing together
         </p>
-        <a href="mailto:theshreykhosla@gmail.com" class="inline-block text-2xl md:text-3xl text-accent-blue hover:text-accent-cyan transition-all duration-300 hover:scale-105 font-semibold">
+        <a href="mailto:theshreykhosla@gmail.com" class="contact-email">
           theshreykhosla@gmail.com
         </a>
       </div>
@@ -35,3 +35,56 @@ import Footer from '../components/Footer.astro';
   
   <Footer />
 </BaseLayout>
+
+<style>
+  .contact-section {
+    min-height: 100svh;
+    padding: 6rem 1rem;
+    background: linear-gradient(to bottom, var(--color-space-black), var(--color-space-navy));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 640px)  { .contact-section { padding: 6rem 1.5rem; } }
+  @media (min-width: 1024px) { .contact-section { padding: 6rem 2rem;   } }
+
+  .contact-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--color-text-primary);
+  }
+
+  @media (min-width: 768px) { .contact-title { font-size: 3rem; } }
+
+  .contact-sub {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.625;
+  }
+
+  @media (min-width: 768px) { .contact-sub { font-size: 1.5rem; } }
+
+  .contact-email {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: var(--color-accent-blue);
+    font-weight: 600;
+    transition: all 300ms;
+  }
+
+  .contact-email:hover {
+    color: var(--color-accent-cyan);
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 768px) { .contact-email { font-size: 1.875rem; } }
+</style>

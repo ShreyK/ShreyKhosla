@@ -25,54 +25,38 @@ const socialLinks = [
 ];
 ---
 
-<footer class="w-full bg-space-dark border-t border-accent-blue/10 py-12 md:py-16 mt-24 flex justify-center">
-  <div class="w-full max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
       <!-- Brand -->
-      <div class="text-center">
-        <h3 class="text-2xl font-bold text-text-primary mb-4">Shrey Khosla</h3>
-        <p class="text-text-secondary leading-relaxed">
+      <div class="footer-col">
+        <h3 class="footer-brand">Shrey Khosla</h3>
+        <p class="footer-tagline">
           Senior Software Engineer building products from 0→1 to N→N+1
         </p>
       </div>
 
       <!-- Quick Links -->
-      <div class="text-center">
-        <h4 class="text-lg font-semibold text-text-primary mb-4">Quick Links</h4>
-        <ul class="space-y-2">
-          <li>
-            <a href="/#experience" class="text-text-secondary hover:text-accent-blue transition-colors">
-              Experience
-            </a>
-          </li>
-          <li>
-            <a href="/#products" class="text-text-secondary hover:text-accent-blue transition-colors">
-              Products
-            </a>
-          </li>
-          <li>
-            <a href="/#games" class="text-text-secondary hover:text-accent-blue transition-colors">
-              Games
-            </a>
-          </li>
-          <li>
-            <a href="/blog" class="text-text-secondary hover:text-accent-blue transition-colors">
-              Blog
-            </a>
-          </li>
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/#experience">Experience</a></li>
+          <li><a href="/#products">Products</a></li>
+          <li><a href="/#games">Games</a></li>
+          <li><a href="/blog">Blog</a></li>
         </ul>
       </div>
 
       <!-- Connect -->
-      <div class="text-center">
-        <h4 class="text-lg font-semibold text-text-primary mb-4">Connect</h4>
-        <div class="flex space-x-4 justify-center">
+      <div class="footer-col">
+        <h4 class="footer-heading">Connect</h4>
+        <div class="social-links">
           {socialLinks.map((link) => (
             <a
               href={link.url}
               target={link.url.startsWith('mailto:') ? undefined : '_blank'}
               rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-              class="w-6 h-6 text-text-secondary hover:text-accent-blue transition-colors inline-block"
+              class="social-icon"
               aria-label={link.name}
               set:html={link.svg}
             />
@@ -82,13 +66,150 @@ const socialLinks = [
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-accent-blue/10 pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-      <p class="text-text-muted text-sm text-center">
-        © {currentYear} Shrey Khosla. All rights reserved.
-      </p>
-      <p class="text-text-muted text-sm text-center">
-        Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-accent-cyan transition-colors">Astro</a>
+    <div class="footer-bottom">
+      <p class="footer-copy">© {currentYear} Shrey Khosla. All rights reserved.</p>
+      <p class="footer-copy">
+        Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
       </p>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    width: 100%;
+    background: var(--color-space-dark);
+    border-top: 1px solid oklch(from var(--color-accent-blue) l c h / 0.1);
+    padding: 3rem 0;
+    /* margin-top: 6rem; */
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .site-footer {
+      padding: 4rem 0;
+    }
+  }
+
+  .footer-inner {
+    width: 100%;
+    max-width: 80rem;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .footer-inner {
+      padding: 0 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-inner {
+      padding: 0 2rem;
+    }
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  .footer-col {
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-tagline {
+    color: var(--color-text-secondary);
+    line-height: 1.625;
+  }
+
+  .footer-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    color: var(--color-text-secondary);
+    transition: color 150ms ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-accent-blue);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .social-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-text-secondary);
+    transition: color 150ms ease;
+    display: inline-block;
+  }
+
+  .social-icon:hover {
+    color: var(--color-accent-blue);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid oklch(from var(--color-accent-blue) l c h / 0.1);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+
+  .footer-copy {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .footer-copy a {
+    color: var(--color-accent-blue);
+    transition: color 150ms ease;
+  }
+
+  .footer-copy a:hover {
+    color: var(--color-accent-cyan);
+  }
+</style>

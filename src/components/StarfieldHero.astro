@@ -2,35 +2,35 @@
 // Starfield Hero Component with Three.js
 ---
 
-<section id="hero" class="starfield-hero relative min-h-screen flex items-center justify-center overflow-hidden">
+<section id="hero" class="starfield-hero">
   <!-- Three.js Canvas -->
-  <canvas id="starfield-canvas" class="absolute inset-0 w-full h-full"></canvas>
+  <canvas id="starfield-canvas" class="canvas-bg"></canvas>
   
   <!-- Hero Content Overlay -->
-  <div class="hero-content relative z-10 text-center px-4 max-w-5xl mx-auto">
-    <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6">
+  <div class="hero-content">
+    <h1 class="hero-title">
       <span class="hero-name">Shrey Khosla</span>
     </h1>
-    <p class="hero-subtitle text-xl sm:text-2xl md:text-3xl text-text-secondary mb-8">
+    <p class="hero-subtitle">
       Senior Software Engineer
     </p>
-    <p class="hero-description text-base sm:text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-12 opacity-0 leading-relaxed">
+    <p class="hero-description">
       7+ years building products from 0→1 to N→N+1 across startups and enterprise
     </p>
-    <div class="hero-ctas flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 mt-4">
-      <a href="#experience" class="cta-primary px-12 py-5 glassmorphism glow-border rounded-lg hover:scale-105 transition-all duration-300 font-semibold text-text-primary text-lg min-w-[200px] text-center">
+    <div class="hero-ctas">
+      <a href="#experience" class="cta-primary glassmorphism glow-border">
         View Work
       </a>
-      <a href="#contact" class="cta-secondary px-12 py-5 bg-accent-blue rounded-lg hover:bg-accent-cyan transition-all duration-300 font-semibold shadow-lg shadow-accent-blue/50 text-lg min-w-[200px] text-center" style="color: oklch(1.0 0 0);">
+      <a href="#contact" class="cta-secondary">
         Get in Touch
       </a>
     </div>
   </div>
   
   <!-- Scroll Indicator -->
-  <div class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-    <div class="scroll-arrow animate-bounce">
-      <svg class="w-6 h-6 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="scroll-indicator">
+    <div class="scroll-arrow">
+      <svg class="scroll-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
       </svg>
     </div>
@@ -233,13 +233,46 @@
 
 <style>
   .starfield-hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     background: radial-gradient(
       ellipse at center,
       oklch(0.18 0.04 240) 0%,
       oklch(0.10 0.01 240) 100%
     );
   }
-  
+
+  .canvas-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 1rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px)  { .hero-title { font-size: 3.75rem; } }
+  @media (min-width: 768px)  { .hero-title { font-size: 4.5rem;  } }
+  @media (min-width: 1024px) { .hero-title { font-size: 6rem;   } }
+
   .hero-name {
     background: linear-gradient(
       135deg,
@@ -252,30 +285,110 @@
     background-clip: text;
     text-shadow: 0 0 40px rgba(100, 150, 255, 0.3);
   }
-  
-  .hero-content {
-    animation: fadeIn 0.5s ease-out;
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
   }
-  
+
+  @media (min-width: 640px)  { .hero-subtitle { font-size: 1.5rem; } }
+  @media (min-width: 768px)  { .hero-subtitle { font-size: 1.875rem; } }
+
+  .hero-description {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 42rem;
+    margin: 0 auto 3rem;
+    opacity: 0; /* GSAP animates this in */
+    line-height: 1.625;
+  }
+
+  @media (min-width: 640px)  { .hero-description { font-size: 1.125rem; } }
+  @media (min-width: 768px)  { .hero-description { font-size: 1.25rem;  } }
+
+  .hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* GSAP animates this in */
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-ctas { flex-direction: row; }
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    min-width: 200px;
+    text-align: center;
+    transition: all 300ms;
+  }
+
+  .cta-primary {
+    color: var(--color-text-primary);
+  }
+
+  .cta-primary:hover {
+    transform: scale(1.05);
+    color: var(--color-text-primary);
+  }
+
+  .cta-secondary {
+    background: var(--color-accent-blue);
+    color: oklch(1.0 0 0);
+    box-shadow: 0 10px 15px oklch(from var(--color-accent-blue) l c h / 0.5);
+  }
+
+  .cta-secondary:hover {
+    background: var(--color-accent-cyan);
+    transform: scale(1.05);
+    color: oklch(1.0 0 0);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .scroll-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-accent-blue);
+  }
+
+  .scroll-arrow {
+    animation: bounce 1s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
-  
-  /* Reduced motion fallback */
+
   @media (prefers-reduced-motion: reduce) {
     .hero-name {
       text-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
     }
-    
     .scroll-arrow {
       animation: none;
     }
-    
     * {
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;

@@ -10,34 +10,27 @@ const navItems = [
 ];
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 glassmorphism border-b border-accent-blue/20 backdrop-blur-lg">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16 md:h-20">
+<nav class="site-nav glassmorphism">
+  <div class="nav-inner">
+    <div class="nav-bar">
       <!-- Logo -->
-      <a href="/" class="text-xl md:text-2xl font-bold text-text-primary hover:text-accent-cyan transition-colors">
-        SK
-      </a>
+      <a href="/" class="nav-logo">SK</a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-6 lg:gap-8">
+      <div class="desktop-nav">
         {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="text-text-secondary hover:text-accent-blue transition-colors font-medium whitespace-nowrap"
-          >
-            {item.label}
-          </a>
+          <a href={item.href} class="nav-link">{item.label}</a>
         ))}
       </div>
 
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden text-text-primary hover:text-accent-blue transition-colors"
+        class="mobile-menu-btn"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             id="menu-icon-open"
             stroke-linecap="round"
@@ -59,15 +52,10 @@ const navItems = [
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden glassmorphism border-t border-accent-blue/20">
-    <div class="px-4 py-6 space-y-4">
+  <div id="mobile-menu" class="mobile-menu hidden glassmorphism">
+    <div class="mobile-nav">
       {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="block text-text-secondary hover:text-accent-blue transition-colors py-2"
-        >
-          {item.label}
-        </a>
+        <a href={item.href} class="mobile-nav-link">{item.label}</a>
       ))}
     </div>
   </div>
@@ -104,8 +92,134 @@ const navItems = [
 </script>
 
 <style>
-  nav {
+  /* Ensure JS-toggled .hidden works after Tailwind is removed */
+  :global(.hidden) {
+    display: none !important;
+  }
+
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    border-bottom: 1px solid oklch(from var(--color-accent-blue) l c h / 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     animation: slideDown 0.5s ease-out;
+  }
+
+  .nav-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .nav-inner { padding: 0 1.5rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-inner { padding: 0 2rem; }
+  }
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-bar { height: 5rem; }
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    transition: color 150ms ease;
+  }
+
+  .nav-logo:hover {
+    color: var(--color-accent-cyan);
+  }
+
+  @media (min-width: 768px) {
+    .nav-logo { font-size: 1.5rem; }
+  }
+
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-nav { gap: 2rem; }
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 150ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent-blue);
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: color 150ms ease;
+    padding: 0;
+  }
+
+  .mobile-menu-btn:hover {
+    color: var(--color-accent-blue);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu-btn { display: none; }
+  }
+
+  .menu-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .mobile-menu {
+    border-top: 1px solid oklch(from var(--color-accent-blue) l c h / 0.2);
+  }
+
+  .mobile-nav {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    color: var(--color-text-secondary);
+    padding: 0.5rem 0;
+    transition: color 150ms ease;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--color-accent-blue);
   }
 
   @keyframes slideDown {
