@@ -200,13 +200,15 @@ const { name, description, metrics, techStack, liveUrl, githubUrl, image } = Ast
   }
 
   .cta-live {
-    background: var(--color-accent-blue);
+    /* Darkened from L=0.65 → L=0.48 to achieve ≥4.5:1 contrast with white text */
+    background: oklch(0.48 0.25 240);
     color: oklch(1.0 0 0);
     box-shadow: 0 4px 6px oklch(from var(--color-accent-blue) l c h / 0.4);
   }
 
   .cta-live:hover {
-    background: var(--color-accent-cyan);
+    /* Darkened cyan from L=0.75 → L=0.55 to maintain ≥4.5:1 with white text */
+    background: oklch(0.55 0.20 200);
     transform: scale(1.05);
     color: oklch(1.0 0 0);
     box-shadow: 0 4px 6px oklch(from var(--color-accent-blue) l c h / 0.5);
