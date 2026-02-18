@@ -118,7 +118,7 @@ Full-width cinematic showcase for Endeavor game.
   - **Play on Steam** (link to Steam page when available)
   - **Visit shrey.games** (https://shrey.games)
   - **Watch Trailer** (YouTube link if available)
-- Social Links: Discord, Twitter (@MrReyRay), YouTube (@ShreyGames)
+- Social Links: Discord, Twitter (@TheShreyKhosla), YouTube (@ShreyGames)
 - Dev log preview (latest updates from shrey.games)
 
 **Design:**
