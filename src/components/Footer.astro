@@ -157,11 +157,15 @@ const socialLinks = [
 
   .footer-links a {
     color: var(--color-text-secondary);
-    transition: color 150ms ease;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: oklch(from var(--color-text-secondary) l c h / 0.4);
+    transition: color 150ms ease, text-decoration-color 150ms ease;
   }
 
   .footer-links a:hover {
     color: var(--color-accent-blue);
+    text-decoration-color: var(--color-accent-blue);
   }
 
   .social-links {
@@ -206,10 +210,14 @@ const socialLinks = [
 
   .footer-copy a {
     color: var(--color-accent-blue);
-    transition: color 150ms ease;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: oklch(from var(--color-accent-blue) l c h / 0.5);
+    transition: color 150ms ease, text-decoration-color 150ms ease;
   }
 
   .footer-copy a:hover {
     color: var(--color-accent-cyan);
+    text-decoration-color: var(--color-accent-cyan);
   }
 </style>
