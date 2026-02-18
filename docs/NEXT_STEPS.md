@@ -70,7 +70,6 @@ Grid layout featuring 3 main products:
 **Products:**
 1. **Lettucemeet** (https://lettucemeet.com)
    - Description: Scheduling group meetings made easy
-   - Metrics: 200K+ MAU
    - Tech: React, Node, PostgreSQL, Docker, AWS ECS
    - Links: Live site
    - Visual: Screenshot/mockup

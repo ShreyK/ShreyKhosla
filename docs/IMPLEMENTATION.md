@@ -244,7 +244,7 @@ shrey.khosla/
 6. **Internships:** Microsoft, theScore, KnowRoaming, Uken Games, UW HCI
 
 ### Products (3 featured)
-1. **Lettucemeet** — 200K+ MAU scheduling platform (React, Node, PostgreSQL, Docker, AWS)
+1. **Lettucemeet** — Scheduling platform (React, Node, PostgreSQL, Docker, AWS)
 2. **Staunq** — Crypto AI Chatbot (NextJS, OpenAI GPT-3, Binance API, Vercel)
 3. **Market Predictor** — ML Neural Network (TensorFlow, Keras LSTM, Python, pandas)
 

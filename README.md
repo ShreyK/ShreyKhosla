@@ -12,7 +12,7 @@ Professional portfolio showcasing 7+ years of software engineering experience ac
 - ⚡ **GSAP Animations** — Smooth scroll-triggered reveals and transitions
 - 🎮 **Games Showcase** — Featured: Endeavor (Rust/Bevy deep space game on Steam)
 - 💼 **Experience Timeline** — 7 companies, 0→1 to N→N+1 product phases
-- 🚀 **Products** — Lettucemeet (200K+ MAU), Staunq, Market Predictor
+- 🚀 **Products** — Lettucemeet, Staunq, Market Predictor
 - 📝 **Blog/Devlog** — MDX-powered content collections
 - 🎨 **Dark Futuristic Design** — oklch() colors, glassmorphism, glowing accents
 - ♿ **Accessible** — WCAG 2.1 AA compliant, motion-safe fallbacks
