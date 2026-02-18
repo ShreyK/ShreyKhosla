@@ -1,5 +1,5 @@
 ---
-// Game Showcase - Featured: Endeavor
+// Game Showcase - Featured: Pillar & Endeavor
 ---
 
 <section id="games" class="game-section">
@@ -10,7 +10,72 @@
   </div>
 
   <div class="game-inner">
-    <!-- Game Title -->
+
+    <!-- ── PILLAR ── -->
+    <div class="title-block">
+      <span class="coming-soon-badge">Coming Soon</span>
+      <h2 class="game-title-glow pillar-glow">PILLAR</h2>
+      <p class="game-subtitle pillar-subtitle">Multiplayer 3D Game</p>
+    </div>
+
+    <div class="game-description glassmorphism">
+      <p class="game-desc-text">
+        A cross-platform multiplayer 3D game built with <span class="highlight pillar-highlight">Rust</span> and the
+        <span class="highlight pillar-highlight">Bevy Engine</span>.
+        Battle with friends across platforms in a fast-paced, fully 3D world — coming soon to Steam.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon pillar-icon">✦</span>
+          <div>
+            <h3 class="feature-title">Multiplayer</h3>
+            <p class="feature-desc">Play with friends online</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon pillar-icon">✦</span>
+          <div>
+            <h3 class="feature-title">3D World</h3>
+            <p class="feature-desc">Fully three-dimensional gameplay</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon pillar-icon">✦</span>
+          <div>
+            <h3 class="feature-title">Cross-Platform</h3>
+            <p class="feature-desc">Windows, Linux, macOS</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon pillar-icon">✦</span>
+          <div>
+            <h3 class="feature-title">Coming to Steam</h3>
+            <p class="feature-desc">Wishlist &amp; follow for updates</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        Built with Rust and the Bevy Engine — multiplayer, 3D, cross-platform
+      </div>
+    </div>
+
+    <div class="game-ctas pillar-ctas">
+      <a
+        href="https://pillar.shrey.games/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-steam pillar-cta-primary"
+      >
+        Visit pillar.shrey.games
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="game-divider" aria-hidden="true"></div>
+
+    <!-- ── ENDEAVOR ── -->
     <div class="title-block">
       <h2 class="game-title-glow">ENDEAVOR</h2>
       <p class="game-subtitle">3D Deep Space Game</p>
@@ -381,6 +446,79 @@
   .social-icon {
     width: 2rem;
     height: 2rem;
+  }
+
+  /* ── Pillar accent overrides ── */
+  .pillar-glow {
+    background: linear-gradient(
+      135deg,
+      oklch(0.85 0.18 310) 0%,
+      oklch(0.72 0.25 290) 30%,
+      oklch(0.65 0.28 270) 60%,
+      oklch(0.78 0.22 300) 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .pillar-subtitle {
+    color: oklch(0.78 0.2 305);
+  }
+
+  .pillar-highlight {
+    color: oklch(0.78 0.2 305);
+  }
+
+  .pillar-icon {
+    color: oklch(0.78 0.2 305);
+  }
+
+  .coming-soon-badge {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: oklch(0.25 0.08 300 / 0.5);
+    border: 1px solid oklch(0.6 0.2 305 / 0.5);
+    color: oklch(0.82 0.18 305);
+  }
+
+  .pillar-ctas {
+    margin-bottom: 0;
+  }
+
+  .pillar-cta-primary {
+    background: oklch(0.55 0.22 295);
+    color: #fff;
+    box-shadow: 0 20px 25px oklch(0.55 0.22 295 / 0.4);
+  }
+
+  .pillar-cta-primary:hover {
+    background: oklch(0.65 0.25 300);
+    transform: scale(1.05);
+    color: #fff;
+  }
+
+  /* ── Divider between games ── */
+  .game-divider {
+    width: 100%;
+    max-width: 56rem;
+    margin: 4rem auto;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(0.45 0.1 270 / 0.5) 30%,
+      oklch(0.55 0.15 270 / 0.6) 50%,
+      oklch(0.45 0.1 270 / 0.5) 70%,
+      transparent
+    );
   }
 
   @keyframes shimmer {
