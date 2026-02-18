@@ -173,14 +173,19 @@ const internships = [
       <p class="text-xl text-text-secondary max-w-2xl mx-auto">7+ years building products across startups and enterprise</p>
     </div>
 
-    <!-- Timeline Line (Desktop) -->
-    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-accent-blue/50 to-transparent h-full top-0"></div>
-
-    <!-- Experience Cards -->
-    <div class="space-y-12 md:space-y-16">
-      {experiences.map((exp, index) => (
-        <ExperienceCard {...exp} side={index % 2 === 0 ? 'left' : 'right'} />
-      ))}
+    <!-- Experience Cards Container with Timeline -->
+    <div class="relative">
+      <!-- Timeline Line (Desktop) -->
+      <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-accent-blue/50 to-transparent h-full top-0"></div>
+      
+      <!-- Experience Cards -->
+      <div class="flex flex-col space-y-12 md:space-y-16">
+        {experiences.map((exp, index) => (
+          <div class={`flex w-full ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+            <ExperienceCard {...exp} side={index % 2 === 0 ? 'left' : 'right'} />
+          </div>
+        ))}
+      </div>
     </div>
 
     <!-- Internships Section (Expandable) -->
@@ -192,9 +197,11 @@ const internships = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </summary>
-        <div class="mt-8 space-y-12">
+        <div class="mt-8 flex flex-col space-y-12">
           {internships.map((intern, index) => (
-            <ExperienceCard {...intern} side={index % 2 === 0 ? 'left' : 'right'} />
+            <div class={`flex w-full ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+              <ExperienceCard {...intern} side={index % 2 === 0 ? 'left' : 'right'} />
+            </div>
           ))}
         </div>
       </details>

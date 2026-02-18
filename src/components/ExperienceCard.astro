@@ -28,12 +28,12 @@ const phaseColors: Record<string, string> = {
 const phaseColorClass = phaseColors[phase] || '';
 ---
 
-<div class={`experience-card relative w-full md:w-[calc(50%-2rem)] ${side === 'left' ? 'md:mr-auto md:pr-10' : 'md:ml-auto md:pl-10'}`}>
+<div class={`experience-card relative w-full md:w-[calc(50%-2rem)] ${side === 'left' ? 'md:pr-8' : 'md:pl-8'}`}>
   <!-- Timeline Dot (Desktop) -->
-  <div class={`timeline-dot hidden md:block absolute top-10 w-4 h-4 rounded-full bg-accent-blue glow-dot transition-all duration-300 ${side === 'left' ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}></div>
+  <div class={`timeline-dot hidden md:block absolute top-10 w-4 h-4 rounded-full bg-accent-blue glow-dot transition-all duration-300 z-10 ${side === 'left' ? '-right-8 translate-x-1/2' : '-left-8 -translate-x-1/2'}`}></div>
 
   <!-- Card Content -->
-  <div class="experience-card-content glassmorphism p-8 md:p-10 rounded-lg border border-accent-blue/20 hover:border-accent-blue/40 transition-all duration-300 opacity-0">
+  <div class="experience-card-content glassmorphism p-10 md:p-12 rounded-lg border border-accent-blue/20 hover:border-accent-blue/40 transition-all duration-300 opacity-0">
     <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
       <div class="flex-1">
         <h3 class="text-2xl font-bold text-text-primary mb-1">{company}</h3>
@@ -60,7 +60,7 @@ const phaseColorClass = phaseColors[phase] || '';
       </ul>
     )}
 
-    <div class="flex flex-wrap gap-2 mt-4">
+    <div class="flex flex-wrap gap-2 mt-4 ">
       {techStack.map((tech) => (
         <TechPill label={tech} />
       ))}
