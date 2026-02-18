@@ -164,27 +164,26 @@
     z-index: 0;
   }
 
+  /* Replaced hard gradients with seamless radial glows — no sharp edges at section seams */
   .game-bg-overlay-1 {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      oklch(from var(--color-space-black) l c h / 0.8),
-      oklch(from var(--color-space-black) l c h / 0.7),
-      var(--color-space-black)
+    background: radial-gradient(
+      ellipse 100% 70% at 50% 50%,
+      oklch(0.13 0.035 270 / 0.5),
+      transparent
     );
   }
 
   .game-bg-overlay-2 {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom right,
-      var(--color-space-navy),
-      var(--color-space-dark),
-      var(--color-space-black)
+    background: radial-gradient(
+      ellipse 60% 50% at 20% 80%,
+      oklch(0.12 0.04 250 / 0.35),
+      transparent
     );
-    opacity: 0.6;
+    opacity: 1;
   }
 
   .game-inner {

@@ -205,11 +205,11 @@ const experiences: ExperienceData[] = [
   .section-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      var(--color-space-black),
-      oklch(from var(--color-space-navy) l c h / 0.3),
-      var(--color-space-black)
+    /* Soft radial nebula — no hard top/bottom edges that cause section-seam lines */
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      oklch(0.14 0.03 240 / 0.45),
+      transparent
     );
     pointer-events: none;
   }

@@ -40,11 +40,28 @@ import Footer from '../components/Footer.astro';
   .contact-section {
     min-height: 100svh;
     padding: 6rem 1rem;
-    background: linear-gradient(to bottom, var(--color-space-black), var(--color-space-navy));
+    background: transparent;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
+  /* Subtle ambient glow for the contact section */
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      oklch(0.13 0.04 260 / 0.4),
+      transparent
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .contact-inner { position: relative; z-index: 1; }
 
   @media (min-width: 640px)  { .contact-section { padding: 6rem 1.5rem; } }
   @media (min-width: 1024px) { .contact-section { padding: 6rem 2rem;   } }

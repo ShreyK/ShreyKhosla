@@ -51,13 +51,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- View Transitions API -->
     <meta name="view-transition" content="same-origin" />
 
-    <!-- Google Analytics -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-D45D8VWLQB"></script>
+    <!-- Google Analytics (disabled on localhost) -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-D45D8VWLQB');
+      (function() {
+        var hostname = window.location.hostname;
+        if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') return;
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-D45D8VWLQB';
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-D45D8VWLQB');
+      })();
     </script>
   </head>
   <body>
