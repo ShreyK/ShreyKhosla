@@ -2,8 +2,8 @@
 
 **Project:** Shrey Khosla Portfolio — shreykhosla.com  
 **Started:** February 15, 2026  
-**Current Session:** Session 3 - February 15, 2026  
-**Status:** 🚧 In Progress → Blog & About sections complete
+**Current Session:** Session 4 - February 19, 2026  
+**Status:** 🚧 In Progress → All core sections complete, deployment pipeline ready
 
 ## Overview
 
@@ -95,8 +95,8 @@ Building a dark, futuristic portfolio website showcasing professional experience
 - [x] Update navigation to include About link
 - [ ] Background video/GIF from shrey.games
 - [ ] Animated title with glow effect
-- [ ] CTA buttons (Steam, shrey.games)
-- [ ] Social links (Discord, Twitter, YouTube)
+- [x] CTA buttons (Steam, shrey.games)
+- [x] Social links (Discord, Twitter, YouTube)
 
 ### Phase 7: Blog / Devlog
 - [ ] Configure content collections in src/content.config.ts
@@ -121,14 +121,14 @@ Building a dark, futuristic portfolio website showcasing professional experience
 - [ ] Animated CTAs with glow effects
 
 ### Phase 10: SEO & Performance
-- [ ] Add comprehensive meta tags
-- [ ] Configure @astrojs/sitemap
+- [x] Add comprehensive meta tags (BaseLayout.astro)
+- [x] Configure @astrojs/sitemap
 - [ ] Add Open Graph images
-- [ ] Create robots.txt
+- [x] Create robots.txt
 - [ ] Optimize images (Astro Image component)
 - [ ] Add font preloading
 - [ ] Implement content-visibility for off-screen sections
-- [ ] Lighthouse audit (target 95+)
+- [x] Lighthouse audit (target 95+)
 
 ### Phase 11: Accessibility
 - [ ] Semantic HTML throughout
@@ -137,29 +137,30 @@ Building a dark, futuristic portfolio website showcasing professional experience
 - [ ] Color contrast validation (≥4.5:1)
 - [ ] Comprehensive prefers-reduced-motion support
 
-### Phase 12: Deployment
-- [ ] Create .github/workflows/deploy.yml
-- [ ] Configure GitHub Actions (withastro/action@v5)
-- [ ] Set GitHub Pages source to "GitHub Actions"
-- [ ] Verify build succeeds
+### Phase 12: Deployment ✅
+- [x] Create .github/workflows/deploy.yml
+- [x] Configure GitHub Actions (actions/deploy-pages@v4)
+- [x] Set GitHub Pages source to "GitHub Actions"
+- [x] Verify build succeeds
 
 ### Phase 13: Custom Domain
-- [ ] Configure DNS A records (185.199.108-111.153)
-- [ ] Configure DNS CNAME (www → username.github.io)
-- [ ] Add custom domain in GitHub repo settings
-- [ ] Verify domain in GitHub account settings
-- [ ] Enable HTTPS enforcement
+- [x] Configure DNS A records (185.199.108-111.153)
+- [x] Configure DNS CNAME (www → username.github.io)
+- [x] Add public/CNAME file (shreykhosla.com)
+- [x] Add custom domain in GitHub repo settings
+- [x] Verify domain in GitHub account settings
+- [x] Enable HTTPS enforcement
 
 ### Phase 14: Testing & Launch
-- [ ] Local dev testing (npm run dev)
-- [ ] Build test (npm run build)
-- [ ] Responsive testing (320px - 1920px)
-- [ ] Cross-browser testing (Chrome, Firefox, Safari)
-- [ ] Performance validation
-- [ ] Accessibility validation
-- [ ] Deploy to production
-- [ ] Verify DNS propagation
-- [ ] Final production QA
+- [x] Local dev testing (npm run dev)
+- [x] Build test (npm run build)
+- [x] Responsive testing (320px - 1920px)
+- [x] Cross-browser testing (Chrome, Firefox, Safari)
+- [x] Performance validation
+- [x] Accessibility validation
+- [x] Deploy to production
+- [x] Verify DNS propagation
+- [x] Final production QA
 
 ## File Structure
 
@@ -323,4 +324,4 @@ shrey.khosla/
 
 ---
 
-**Last Updated:** February 15, 2026
+**Last Updated:** February 19, 2026
