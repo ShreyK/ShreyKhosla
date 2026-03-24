@@ -1,0 +1,162 @@
+---
+title: "Building an AI-Powered Interview Platform with Claude and ElevenLabs"
+description: "How I architected a voice AI interview system using Claude Sonnet as the reasoning engine, ElevenLabs for conversational voice, and a multi-model LLM scoring pipeline on AWS, a case study in deploying LLMs for high-stakes enterprise workflows."
+pubDate: 2026-03-24
+author: "Shrey Khosla"
+tags:
+  ["ai", "claude", "elevenlabs", "enterprise", "llm", "anthropic", "aws", "interview", "scoring"]
+---
+
+One of the more interesting engineering problems I've worked on recently is building a fully automated, AI-powered interview pipeline for [Mavi](https://www.maviwork.com/), a talent acquisition platform connecting US companies with global finance professionals. The goal: replace inconsistent, expensive recruiter phone screens with structured, objective, voice-based first-round interviews conducted entirely by an AI agent.
+
+This post is the story of how I built that system: the architecture decisions, the prompt engineering challenges, and the honest tradeoffs of deploying large language models in a high-stakes enterprise setting. Consider it a case study in what it actually takes to ship LLMs in production for consequential, regulated workflows.
+
+---
+
+## The Problem
+
+Recruiters spend hours on first-round screens only to discover basic mismatches in experience, technical depth, or role fit. These screens are expensive, hard to calibrate across interviewers, and inherently inconsistent.
+
+A well-designed AI interviewer can ask the same structured questions at scale, apply consistent evaluation rubrics, and surface candidates to human reviewers only when it matters.
+
+The challenge isn't just building a chatbot. It's building an agent that:
+
+- Conducts a real conversation, adapting to candidate responses
+- Enforces strict exam-like behavior (no hints, no corrections)
+- Routes dynamically based on a candidate's background
+- Detects and handles edge cases: abandoned interviews, tab switches, session resumptions
+- Produces structured, defensible evaluation outputs
+
+---
+
+## Architecture Overview
+
+At a high level, the system has two distinct phases: the **interview phase** (real-time, voice-driven) and the **evaluation phase** (async, LLM-powered scoring).
+
+```
+Candidate (browser)
+       │
+       ▼
+ElevenLabs Conversational AI  ←→  Claude Sonnet 4.5
+       │                          (interview brain)
+       │  (interview completes)
+       ▼
+   AWS S3  ──  transcript + audio stored
+       │
+       ▼
+AWS Lambda
+   └── Scoring pipeline
+          │
+          ▼
+   Database  (PostgreSQL)
+```
+
+---
+
+### Why ElevenLabs + Claude?
+
+ElevenLabs Conversational AI provides the real-time voice layer: text-to-speech synthesis, speech-to-text transcription, conversation turn management, and session lifecycle. It's a capable platform for building voice agents, and crucially, it allows you to plug in your own LLM as the reasoning engine.
+
+I chose **Claude Sonnet 4.5** as that engine for a specific reason: **instruction-following fidelity**. An interview agent operating in an assessment context has behavioral constraints that must be non-negotiable.
+
+- The Agent cannot hint.
+- The Agent cannot correct.
+- The Agent cannot be talked into revealing what a good answer looks like.
+- The Agent has to follow a specific question order, adapt based on candidate routing, and exit the conversation with precise phrasing.
+
+During evaluation, Claude's ability to hold a large context window, follow complex conditional instructions, and maintain a consistent persona across a full interview while resisting off-topic tangents made it the right choice for this workload.
+
+### Staged Prompt Architecture
+
+The interview is structured across discrete prompt stages, each loaded as the agent's system context as the interview progresses. Rather than one monolithic system prompt, each stage has its own context, behavioral constraints, and exit conditions which ensures a modular flow and is easier to test independently.
+
+Each stage transition is explicit, and the agent can keep track of where the user is based on transcript data even when during resumption at a later date.
+
+Using a multi-stage approach allows dynamic branching which is something a rules-based system would struggle to handle gracefully. Candidates don't say "I'm in Track B," they describe their background organically and Claude has to figure out the right interpretation.
+
+### Building a Determinism Harness Around the LLM
+
+The most important insight from building the agent is this: **an LLM operating inside a product workflow is not inherently deterministic, and you have to engineer that property in deliberately.**
+
+Left to its own devices, a large language model is a probability distribution: expressive, flexible, and creative. Those are virtues in a general assistant. In an assessment context, they are liabilities. The agent needed to behave the same way in interview number ten thousand as it did in interview number one. No improvisation. No tone drift. No helpfully rewording a question to make it clearer. No compassionate hinting.
+
+The best way to approach this is by treating prompt design as a **behavioral contract**, not a set of suggestions. A few principles shaped how this was built:
+
+**Explicit state.** Each stage's system context tells the model precisely where it is in the flow: what stage it's in, what has already been completed, what the next action is, and what the exit condition looks like. The model is never left to infer its position in the workflow. This is the equivalent of giving a human interviewer a detailed script with stage markers rather than asking them to improvise from a brief.
+
+**Closed-world instructions.** Rather than defining what the model _should_ do and hoping it avoids everything else, the prompt also explicitly enumerates what it _must not_ do. Providing hints, extending sympathy, offering alternative phrasings, acknowledging answer quality mid-interview - all of these are called out directly as prohibited behaviors. The model needs to know the fences, not just the path.
+
+**Pre-scripted fallback responses.** For high-risk interaction patterns, for eg: a candidate asking for help, expressing frustration, or attempting to restart the interview, I provide literal response templates in the prompt. This removes the model's latitude to generate a response from scratch in a moment where any variation could compromise assessment integrity. Claude's instruction-following strength meant these templates were actually used, not reworded or improved upon.
+
+**Adversarial testing as a design step.** I stress-tested prompts by simulating candidates who actively try to extract hints, derail the flow, or trigger off-script behavior. Prompt versions that failed these tests were revised before shipping. A prompt is only as good as its weakest adversarial edge case.
+
+**Re-entrant contexts.** Session resumption, where a candidate disconnects and returns, is a natural source of non-determinism. Without explicit handling, the model might re-ask completed questions, re-introduce itself incorrectly, or lose track of progress. I handled this by providing structured prior-conversation context in the resumption prompt, explicitly marking what was completed and what remains.
+
+The practical outcome of this approach was that the agent's behavior became predictable enough to meaningfully test. This allowed writing test cases with expected outputs rather than vaguely evaluating "does this feel right." That testability is often what separates a prototype from a production system.
+
+**Completion detection:** The downstream scoring pipeline is triggered by a reliable signal that the interview has concluded properly, which required the agent's closing behavior to be deterministic, not open-ended.
+
+**Proctoring:** The agent monitors for signals of cheating behavior passed through the session context and can flag or terminate a compromised attempt.
+
+---
+
+## The Scoring Pipeline
+
+Once an interview completes, a separate async pipeline handles evaluation. This is where the architecture shifts from real-time conversation to structured analysis.
+
+### Why Multi-Model?
+
+The conversation agent and the scoring system have fundamentally different task shapes.
+
+The agent needs to be a great **conversationalist**: responsive, adaptive, natural, instruction-compliant. Claude Sonnet 4.5 excels here. The scoring pipeline needs to be a great **assessor**: reading a full transcript, applying structured rubrics, weighing evidence across multiple dimensions, and producing calibrated scores. These are different cognitive tasks, and I found that optimizing independently, rather than forcing one model to do everything, produced better outcomes.
+
+The scoring pipeline runs on a seperate frontier model optimized for structured analysis along with audio processing pipelines. Swapping models is a configuration change rather than a rewrite and this allows iterating on different models to optimize the scoring systems.
+
+### Scoring Dimensions
+
+Candidate evaluation is broken into multiple dimensions, which have been thoroughly reviewed and tested by recruiting experts.
+
+A candidate's experience signals mean very different things depending on the track. Skills that indicate strong fit in one context can be a mismatch indicator in another. Naive rubrics that ignore this distinction either over-score candidates who look impressive on paper but wouldn't fit the role, or under-value candidates whose skills are highly relevant but aren't framed in the expected terminology.
+
+I designed separate evaluation lenses for each track, with criteria weighted toward what actually predicts success in that role type. The same transcript, scored through the wrong lens, can produce badly miscalibrated results.
+
+**Interview Completeness**
+A structural check: which interview stages were completed, and at what coverage? This accounts for cases where candidates drop off mid-interview. A 40% complete interview tells you something different than a 90% complete interview even if the raw scores are similar. An incomplete interview should be allowed to resume at a later date.
+
+### Auto-Triage
+
+The scoring output isn't just numbers. The pipeline produces a structured triage decision: approve, reject, or route to human review. Recruiters only see candidates who've cleared the auto-triage, plus borderline cases that need human judgment. The system is designed to compress time-to-shortlist, not replace the recruiter entirely.
+
+---
+
+## What Worked and What Didn't
+
+**Claude's instruction fidelity is genuinely strong.** In an assessment context, where a model being manipulated or drifting off-script has real consequences for candidate fairness, this matters more than it does in most LLM applications. The agent stayed on-script across extensive testing and production use at a reliability that was difficult to achieve with a less instruction-compliant model.
+
+**Track-aware routing is hard to get right.** These require the model to make judgment calls. It requires thorough iteration on the routing prompt and adding explicit handling for ambiguous cases. This is an area where prompt engineering alone hits a ceiling.
+
+**Scoring calibration takes time.** LLM-generated scores are meaningless without calibration against known-good human judgments. Multiple rounds of blind-score comparison between human reviewers and the pipeline, iterating on rubric definitions and score normalization until the distributions aligned. This calibration phase is often underestimated.
+
+---
+
+## Looking Ahead
+
+More broadly, this project reinforced something I think is true about LLMs in enterprise: **the value is rarely in the AI doing something new. It's in the AI doing something consistent.** Automated interviews succeed not because AI is smarter than a recruiter, but because AI applies the same rubric to every candidate every time, at any volume, with full audit trails. At scale, that consistency is what creates real enterprise value.
+
+---
+
+## Why This Is a Model for Agentic Enterprise Deployment
+
+For teams exploring Claude or any other LLMs in production enterprise workflows, this architecture illustrates a few patterns worth highlighting:
+
+**Strict agentic constraint encoding.** Enterprise use cases often require models that won't improvise outside their defined role. Claude's instruction-following capability makes it suitable for workflows where behavioral predictability is a hard requirement.
+
+**Multi-stage prompt architecture.** Complex workflows don't fit in a single system prompt. Structured stage-based prompting, where each stage has its own context, constraints, and exit conditions, scales better and is easier to test and iterate than monolithic prompts.
+
+**LLMs as evaluation engines.** Beyond generation tasks, LLMs produce real value as structured evaluators: applying rubrics, weighting evidence, and producing calibrated scores. This shifts the reliability requirement from "generate something good" to "consistently apply this rubric," which is a very different and often more achievable bar.
+
+If you're building in a similar space (regulated industries, high-stakes decisions, agentic workflows that need to behave predictably under adversarial conditions), I'm happy to compare notes. Reach out via [email](mailto:theshreykhosla@gmail.com) or find me on [LinkedIn](https://linkedin.com/in/shreykhosla).
+
+---
+
+_This is a case study in deploying LLMs for high-stakes enterprise workflows. The views expressed are my own. Mavi's internal business logic, specific evaluation thresholds, and client information are not disclosed._
